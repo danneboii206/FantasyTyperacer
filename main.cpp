@@ -7,7 +7,7 @@
 
 int main()
 {
-    printMainMenu();
+    //printMainMenu();
 
     combat();
 

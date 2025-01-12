@@ -1,0 +1,3 @@
+/Users/daab24/FantasyTyperacer/cmake-build-debug/CMakeFiles/FantasyTyperacer.dir
+/Users/daab24/FantasyTyperacer/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/daab24/FantasyTyperacer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

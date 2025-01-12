@@ -29,7 +29,7 @@ void printMainMenu()
 
     prt("enter the number corresponding to the coice you would like to make.");
     std::cout << std::endl;
-    prt("1) starth game");
+    prt("1) start game");
     std::cout << std::endl;
     prt("2) exit game");
     std::cout << std::endl;
@@ -100,8 +100,8 @@ bool isNumber(std::string input)
     {
         if (!isdigit(input[i]))
         {
-            return false;
+            return false; //exists for-loop
         }
     }
-    return true;
+    return true; //incase for-loop continued (isdigit = true)
 }
