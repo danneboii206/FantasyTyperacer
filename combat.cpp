@@ -33,7 +33,7 @@ void combat()
         lettersWritten += line.length();
     }
 
-    accuracyPercent = (lettersWritten - wrongLetters) / static_cast<double>(wrongLetters);
+    accuracyPercent = 1 - (static_cast<double>(wrongLetters) / (lettersWritten - wrongLetters));
     wordsPerMinute = wordsWritten / (totalTime.count() / 60);
     damage = wordsPerMinute * accuracyPercent;
 
