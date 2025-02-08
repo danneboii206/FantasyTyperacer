@@ -18,11 +18,17 @@ void combat()
     bool typing = true;
     std::string line;
     std::string input;
+
     std::fstream lyrics("../lyrics/lyrics1.txt");
+
     std::chrono::duration<double> totalTime;
     auto initialTime = std::chrono::system_clock::now();
     auto currentTime = std::chrono::system_clock::now();
 
+
+    //Combat is going to be made with WPM * Accuracy. Accuracy will work as a negative
+    //multiplier for every wrong word. WPM is (words/s) * 60 while accuracy is
+    //wpm / (wpm - ((wrong_words_total/s) * 60)). wrong_words_total is the wrong am of words and extra/missing words.
     while (getline(lyrics, line))
     {
         prt(line);
