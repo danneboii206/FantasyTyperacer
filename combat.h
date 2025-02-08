@@ -10,5 +10,5 @@
 void combat();
 int wordCount(std::string word);
 int lineAccuracy(std::string line1, std::string line2);
-
+std::string lyricSelector();
 #endif //COMBAT_H
