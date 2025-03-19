@@ -3,11 +3,12 @@ project(FantasyTyperacer)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SOURCES
-        main.cpp
-        combat.cpp
-        menus.cpp
-        rooms.cpp
-)
 
-add_executable(FantasyTyperacer ${SOURCES})
+
+add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp rooms.cpp
+        characterCode/character.cpp
+        characterCode/character.h
+        characterCode/enemy.cpp
+        characterCode/enemy.h
+        characterCode/goblin.cpp
+        characterCode/goblin.h)
