@@ -69,7 +69,7 @@ int wordCount(std::string word)
     return words;
 }
 
-///returns random .txt file from lyrics directory
+///returns name of random .txt file from lyrics directory
 std::string lyricSelector()
 {
     std::string filePath = "../lyrics";
@@ -90,7 +90,7 @@ std::string lyricSelector()
         i++;
     }
 
-    srand((unsigned int)time(NULL));
+    srand(time(nullptr));
     int randIndex = rand() % (directorySize);
 
     std::string selectedFile = filesInDirectory[randIndex];

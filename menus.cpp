@@ -24,7 +24,7 @@ void printMainMenu()
         bardic.close();
     } else {
         std::cerr << "Error: Unable to open bardic.txt" << std::endl;
-        prt(std::filesystem::current_path());
+        //prt(std::filesystem::current_path());
     }
 
     prt("enter the number corresponding to the coice you would like to make.");
@@ -94,7 +94,7 @@ int menuInput(int menuChoices)
 /// </summary>
 /// <param name="input"></param>
 /// <returns></returns>
-bool isNumber(std::string input)
+bool isNumber(const std::string input)
 {
     for (int i = 0; i < input.length(); i++) //iterates through string. returns false if char can't be converted to int.
     {
