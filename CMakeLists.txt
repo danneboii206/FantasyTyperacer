@@ -11,4 +11,6 @@ add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp rooms.cpp
         characterCode/enemy.cpp
         characterCode/enemy.h
         characterCode/goblin.cpp
-        characterCode/goblin.h)
+        characterCode/goblin.h
+        characterCode/skeleton.cpp
+        characterCode/skeleton.h)

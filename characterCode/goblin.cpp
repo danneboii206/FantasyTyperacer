@@ -7,6 +7,6 @@
 Goblin::Goblin()
 {
     setName("Goblin");
-    setDescription("./descriptions/goblinDescription.txt");
-    setArt("./art/enemyPortraits/goblin.txt");
+    setDescription("../descriptions/enemyDescriptions/goblinDescription.txt");
+    setArt("../art/enemyPortraits/goblin.txt");
 }

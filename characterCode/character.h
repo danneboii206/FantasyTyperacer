@@ -11,7 +11,7 @@ private:
     float maxHealth;
 
 public:
-    explicit Character(float maxHealth);
+    Character(float maxHealth);
     Character();
     void takeDamage(float damage);
     void setHealth(float health);

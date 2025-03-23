@@ -3,7 +3,10 @@
 #include <chrono>
 #include <fstream>
 #include "combat.h"
+#include "menus.h"
 #include <filesystem>
+#include "characterCode/goblin.h"
+#include "characterCode/skeleton.h"
 
 #define prt(x) std::cout << x << std::endl
 ///central method for combat which initiates the combat.
@@ -15,7 +18,47 @@ void combat()
     double damage = 0;
     double accuracyPercent = 0;
     double wordsPerMinute = 0;
-    bool typing = true;
+    int rnd = rand() % 2;
+    Enemy* enemy = nullptr;
+
+    switch (rnd)
+    {
+        case 0:
+            enemy = new Goblin();
+            break;
+
+        case 1:
+            enemy = new Skeleton();
+
+
+    }
+    //Goblin goblin;
+
+    bool inCombat = true;
+    while(inCombat == true)
+    {
+        typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute);
+        //if (enemy->getHealth() <= 0)
+        //    inCombat = false;
+        //prints for testing purposes
+        prt("Combat()");
+        prt("words written: " << wordsWritten);
+        prt("wpm: " << wordsPerMinute);
+        prt("letters written: " << lettersWritten);
+        prt("wrong letters: " << wrongLetters);
+        //prevents divide by zero
+        prt("accuracy: " << accuracyPercent * 100 << "%");
+        prt("damage: " << damage);
+        prt("");
+    }
+
+
+}
+
+float typeRacer(Enemy& enemy,
+    int& wordsWritten, int& lettersWritten, int& wrongLetters,
+    double& damage, double& accuracyPercent, double& wordsPerMinute)
+{
     std::string line;
     std::string input;
     std::fstream lyrics(lyricSelector());
@@ -24,7 +67,7 @@ void combat()
     auto currentTime = std::chrono::system_clock::now();
     while (getline(lyrics, line))
     {
-        prt(line);
+        printBattle(enemy, line);
         getline(std::cin, input);
         wrongLetters += lineAccuracy(line, input);
         currentTime = std::chrono::system_clock::now();
@@ -32,23 +75,28 @@ void combat()
         wordsWritten += wordCount(input);
         lettersWritten += line.length();
     }
-
-    accuracyPercent = 1 - (static_cast<double>(wrongLetters) / (lettersWritten - wrongLetters));
+    lyrics.clear();
+    lyrics.seekg(0, std::ios::beg);
+    accuracyPercent = 1 - (static_cast<double>(wrongLetters) / lettersWritten);
     wordsPerMinute = wordsWritten / (totalTime.count() / 60);
-    damage = wordsPerMinute * accuracyPercent;
+    double multiplier = (accuracyPercent * 2); //multiplied by 2 so it feels more rewarding to have good accuracy
+    damage = wordsPerMinute * multiplier;
+    enemy.takeDamage(damage);
 
-    //prints just for testing purposes
-    prt("total time: " << totalTime.count());
+    //prints for testing purposes
+    prt("typeRacer()");
+    prt("total time: " << totalTime.count() << " seconds");
     prt("words written: " << wordsWritten);
     prt("wpm: " << wordsPerMinute);
     prt("letters written: " << lettersWritten);
     prt("wrong letters: " << wrongLetters);
     //prevents divide by zero
-
     prt("accuracy: " << accuracyPercent * 100 << "%");
-
     prt("damage: " << damage);
-
+    prt("");
+    return enemy,
+    wordsWritten, lettersWritten, wrongLetters,
+    damage, accuracyPercent, wordsPerMinute;
 }
 
 /// inputs string returns word count of string
@@ -75,7 +123,7 @@ std::string lyricSelector()
     std::string filePath = "../lyrics";
     int directorySize = 0;
 
-    //iterates through files in lyrics directory to gauge its' size
+    //iterates through files in lyrics directory to gauge its size
     for (auto theFile : std::filesystem::directory_iterator(filePath))
         directorySize++;
 
@@ -91,7 +139,7 @@ std::string lyricSelector()
     }
 
     srand(time(nullptr));
-    int randIndex = rand() % (directorySize);
+    int randIndex = rand() % directorySize;
 
     std::string selectedFile = filesInDirectory[randIndex];
     delete[] filesInDirectory;
@@ -106,7 +154,6 @@ int lineAccuracy(std::string line1, std::string line2)
 
     for (int i = 0; i < line1.length(); i++)
     {
-
         if (i < line2.length())
         {
             if (line2[i] != line1[i])
@@ -130,3 +177,16 @@ int lineAccuracy(std::string line1, std::string line2)
 
     return incorrectLetters;
 }
+
+void printBattle(Enemy enemy, std::string line)
+{
+    clearScreen();
+    printFile(enemy.getArt());
+    std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
+    printFile(enemy.getDescription());
+    prt("type the following line to attack:");
+    prt(line);
+}
+
+
+
