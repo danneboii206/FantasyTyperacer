@@ -8,11 +8,11 @@
 
 int main()
 {
-    //printMainMenu();
 
+
+    //printMainMenu();
     combat();
 
-    Goblin goblin;
 
     return 0;
 }

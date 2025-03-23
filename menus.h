@@ -10,5 +10,6 @@
 void printMainMenu();
 int menuInput(int menuChoices);
 bool isNumber(std::string input);
-
+void printFile(std::string filePath);
+void clearScreen();
 #endif //MENUS_H

@@ -11,23 +11,11 @@
 void printMainMenu()
 {
     //flavour text
-#ifdef _WIN32
-    system("cls");
-#else
-    prt("\033[2J\033[1;1H"); // ANSI escape code for clear screen
-#endif
+    clearScreen();
     //prints logo
-    std::ifstream bardic("../bardic.txt"); // Changed to ifstream for reading
-    if (bardic.is_open()) {
-        // Print the contents of the file
-        std::cout << bardic.rdbuf();
-        bardic.close();
-    } else {
-        std::cerr << "Error: Unable to open bardic.txt" << std::endl;
-        //prt(std::filesystem::current_path());
-    }
+    printFile("../bardic.txt");
 
-    prt("enter the number corresponding to the coice you would like to make.");
+    prt("enter the number corresponding to the choice you would like to make.");
     std::cout << std::endl;
     prt("1) start game");
     std::cout << std::endl;
@@ -44,6 +32,39 @@ void printMainMenu()
         case 2:
             //exit game
                 break;
+    }
+}
+
+void clearScreen()
+{
+    for (int i = 0; i < 80; i++)
+        std::cout << std::endl;
+    /*
+    printf(
+        "\033[2J"
+        "\033[1;1H");
+    */
+
+    /*
+#ifdef _WIN32
+    system("cls");
+#else
+    prt("\033[2J\033[1;1H"); // ANSI escape code for clear screen
+#endif
+*/
+}
+
+void printFile(std::string filePath)
+{
+    std::ifstream file(filePath); // Changed to ifstream for reading
+    if (file.is_open()) {
+        // Print the contents of the file
+        std::cout << file.rdbuf();
+        std::cout << std::endl;
+        file.close();
+    } else {
+        std::cerr << "Error: Unable to open" << filePath << std::endl;
+        //prt(std::filesystem::current_path());
     }
 }
 
