@@ -38,8 +38,8 @@ void combat()
     while(inCombat == true)
     {
         typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute);
-        //if (enemy->getHealth() <= 0)
-        //    inCombat = false;
+        if (enemy->getHealth() <= 0)
+            inCombat = false;
         //prints for testing purposes
         prt("Combat()");
         prt("words written: " << wordsWritten);
