@@ -5,7 +5,8 @@
 #include <iostream>
 Player::Player()
 {
-
+    this->inventory = new item*[inventorySize]{nullptr};
+    this->consumedPotions = new item*[inventorySize]{nullptr};
     loadPlayerData();
 }
 
