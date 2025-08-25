@@ -7,7 +7,7 @@
 #ifndef MENUS_H
 #define MENUS_H
 
-void printMainMenu();
+int printMainMenu();
 int menuInput(int menuChoices);
 bool isNumber(std::string input);
 void printFile(std::string filePath);

@@ -6,9 +6,11 @@
 #include <fstream>
 #include <string>
 #include "menus.h"
+#include "combat.h"
+#include "./characterCode/Player.h"
 #define prt(x) std::cout << x << std::endl
 
-void printMainMenu()
+int printMainMenu()
 {
     //flavour text
     clearScreen();
@@ -19,19 +21,25 @@ void printMainMenu()
     std::cout << std::endl;
     prt("1) start game");
     std::cout << std::endl;
-    prt("2) exit game");
+    prt("2) reset save");
     std::cout << std::endl;
-
-    int input = menuInput(2);
+    prt("3) exit game");
+    Player player = Player();
+    int input = menuInput(3);
     switch (input)
     {
         case 1:
-            //start game
+            combat();
                 break;
 
         case 2:
-            //exit game
+
+            player.resetPlayerData();
+            printMainMenu();
                 break;
+        case 3:
+            exit(0);
+            break;
     }
 }
 
@@ -94,7 +102,7 @@ int menuInput(int menuChoices)
 
         input = stoi(strInput);
 
-        if (input > 0 || input <= menuChoices)
+        if (input > 0 && input <= menuChoices)
         {
             selecting = false;
             break;
