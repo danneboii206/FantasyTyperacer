@@ -9,22 +9,27 @@ item::item(std::string itemName, std::string description, double wpmBoost, doubl
 {
 }
 
-std::string item::getDescription()
+std::string item::getDescription() const
 {
     return this->descripton;
 }
 
-std::string item::getName()
+std::string item::getName() const
 {
     return this->itemName;
 }
 
-double item::getWpmBoost()
+double item::getWpmBoost() const
 {
     return this->wpmBoost;
 }
 
-double item::getAccuracyBoost()
+double item::getAccuracyBoost() const
 {
     return this->accuracyBoost;
+}
+
+double item::getHpBoost() const
+{
+    return this->hpBoost;
 }

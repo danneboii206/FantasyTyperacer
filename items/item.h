@@ -18,10 +18,11 @@ private:
 public:
   item() = delete; //no default constructor, only with args
   item(std::string itemName, std::string description, double wpmBoost, double accuracyBoost, double hpBoost);
-  std::string getDescription();
-  std::string getName();
-  double getWpmBoost();
-  double getAccuracyBoost();
+  std::string getDescription() const;
+  std::string getName() const;
+  double getWpmBoost() const;
+  double getAccuracyBoost() const;
+  double getHpBoost() const;
 };
 
 

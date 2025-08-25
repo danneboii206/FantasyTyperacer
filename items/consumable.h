@@ -18,7 +18,7 @@ public:
     consumable(std::string itemName, std::string description, double wpmBoost,
         double accuracyBoost, double hpBoost, int duration);
     void roundOver();
-    int getDuration();
+    int getDuration() const;
 };
 
 

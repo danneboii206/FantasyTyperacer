@@ -15,7 +15,7 @@ void consumable::roundOver()
     --this->duration;
 }
 
-int consumable::getDuration()
+int consumable::getDuration() const
 {
     return this->duration;
 }
