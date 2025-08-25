@@ -7,16 +7,16 @@
 class Character
 {
 private:
-    float health;
-    float maxHealth;
+    double health;
+    double maxHealth;
 
 public:
-    Character(float maxHealth);
+    Character(double maxHealth);
     Character();
-    void takeDamage(float damage);
-    void setHealth(float health);
-    void setMaxHealth(float health);
-    virtual float getHealth() const;
-    virtual float getMaxHealth() const;
+    void takeDamage(double damage);
+    void setHealth(double health);
+    void setMaxHealth(double health);
+    virtual double getHealth() const;
+    virtual double getMaxHealth() const;
 };
 #endif //CHARACTER_H

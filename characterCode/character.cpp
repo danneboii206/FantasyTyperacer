@@ -5,7 +5,7 @@
 #include "character.h"
 
 
-Character::Character(const float maxHealth):maxHealth(maxHealth)
+Character::Character(const double maxHealth):maxHealth(maxHealth)
 {
     health = maxHealth;
 }
@@ -13,23 +13,23 @@ Character::Character():maxHealth(40)
 {
     health = maxHealth;
 }
-void Character::takeDamage(const float damage)
+void Character::takeDamage(const double damage)
 {
     health -= damage;
 }
-void Character::setHealth(const float health)
+void Character::setHealth(const double health)
 {
     this->health = health;
 }
-void Character::setMaxHealth(const float health)
+void Character::setMaxHealth(const double health)
 {
     this->maxHealth = health;
 }
-float Character::getHealth() const
+double Character::getHealth() const
 {
     return health;
 }
-float Character::getMaxHealth() const
+double Character::getMaxHealth() const
 {
     return maxHealth;
 }

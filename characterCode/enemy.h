@@ -15,15 +15,15 @@ private:
     std::string name;
     std::string description;
     std::string art; //filepath to txt file
-    float damage;
+    double damage;
 
 public:
-    explicit Enemy(float damage, float maxHealth);
+    explicit Enemy(double damage, double maxHealth);
     Enemy();
     void setName(std::string name);
     void setDescription(std::string description);
     void setArt(std::string art);
-    void setDamage(float damage);
+    void setDamage(double damage);
     std::string getName();
     std::string getDescription();
     std::string getArt();

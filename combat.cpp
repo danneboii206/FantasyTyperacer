@@ -62,7 +62,7 @@ void combat()
 
 }
 
-float typeRacer(Enemy& enemy,
+double typeRacer(Enemy& enemy,
     int& wordsWritten, int& lettersWritten, int& wrongLetters,
     double& damage, double& accuracyPercent, double& wordsPerMinute,
     Player& player)
