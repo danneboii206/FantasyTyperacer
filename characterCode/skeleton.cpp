@@ -12,3 +12,8 @@ Skeleton::Skeleton()
     setMaxHealth(50);
     setHealth(50);
 }
+
+Skeleton::~Skeleton()
+{
+
+}
