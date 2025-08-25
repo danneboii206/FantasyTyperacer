@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-Enemy::Enemy(float damage, float maxHealth)
+Enemy::Enemy(double damage, double maxHealth)
   :damage(damage), Character(maxHealth)
 {
 }
@@ -26,7 +26,7 @@ void Enemy::setArt(std::string art)
 {
 	this->art = art;
 }
-void Enemy::setDamage(float damage)
+void Enemy::setDamage(double damage)
 {
   this->damage = damage;
 }
