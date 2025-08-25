@@ -6,6 +6,7 @@
 #include "menus.h"
 #include <filesystem>
 #include "characterCode/goblin.h"
+#include "characterCode/Player.h"
 #include "characterCode/skeleton.h"
 
 #define prt(x) std::cout << x << std::endl
@@ -18,9 +19,10 @@ void combat()
     double damage = 0;
     double accuracyPercent = 0;
     double wordsPerMinute = 0;
+    srand(time(NULL));
     int rnd = rand() % 2;
     Enemy* enemy = nullptr;
-
+    Player* player = new Player();
     switch (rnd)
     {
         case 0:
@@ -31,15 +33,20 @@ void combat()
             enemy = new Skeleton();
 
 
+
     }
-    //Goblin goblin;
+
 
     bool inCombat = true;
     while(inCombat == true)
     {
-        typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute);
+        typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute, *player);
+
         if (enemy->getHealth() <= 0)
             inCombat = false;
+
+        player->takeDamage(enemy->getDamage());
+        player->savePlayerData();
         //prints for testing purposes
         prt("Combat()");
         prt("words written: " << wordsWritten);
@@ -57,7 +64,8 @@ void combat()
 
 float typeRacer(Enemy& enemy,
     int& wordsWritten, int& lettersWritten, int& wrongLetters,
-    double& damage, double& accuracyPercent, double& wordsPerMinute)
+    double& damage, double& accuracyPercent, double& wordsPerMinute,
+    Player& player)
 {
     std::string line;
     std::string input;
@@ -67,7 +75,7 @@ float typeRacer(Enemy& enemy,
     auto currentTime = std::chrono::system_clock::now();
     while (getline(lyrics, line))
     {
-        printBattle(enemy, line);
+        printBattle(enemy, line, player);
         getline(std::cin, input);
         wrongLetters += lineAccuracy(line, input);
         currentTime = std::chrono::system_clock::now();
@@ -143,6 +151,7 @@ std::string lyricSelector()
 
     std::string selectedFile = filesInDirectory[randIndex];
     delete[] filesInDirectory;
+
     return selectedFile;
 }
 
@@ -178,12 +187,13 @@ int lineAccuracy(std::string line1, std::string line2)
     return incorrectLetters;
 }
 
-void printBattle(Enemy enemy, std::string line)
+void printBattle(Enemy enemy, std::string line, Player& player)
 {
     clearScreen();
     printFile(enemy.getArt());
     std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
     printFile(enemy.getDescription());
+    prt("player hp: " << player.getHealth());
     prt("type the following line to attack:");
     prt(line);
 }

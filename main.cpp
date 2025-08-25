@@ -9,9 +9,13 @@
 int main()
 {
 
+    while (true)
+    {
+        printMainMenu();
 
-    //printMainMenu();
-    combat();
+    }
+
+
 
 
     return 0;
