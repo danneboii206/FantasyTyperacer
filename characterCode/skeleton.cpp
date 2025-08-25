@@ -8,4 +8,7 @@ Skeleton::Skeleton()
     setName("Skeleton");
     setDescription("../descriptions/enemyDescriptions/skeletonDescription.txt");
     setArt("../art/enemyPortraits/skeleton.txt");
+    setDamage(20);
+    setMaxHealth(50);
+    setHealth(50);
 }
