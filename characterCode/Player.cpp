@@ -19,7 +19,7 @@ Player::~Player()
         this->inventory[i] = nullptr;
     }
 
-    delete this->inventory;
+    delete[] this->inventory;
 
     for (int i = 0; i < potionsConsumedAmount; i++)
     {
@@ -147,6 +147,10 @@ std::string Player::unequipItem(int index)
 
     this->accBoost -= this->inventory[index]->getAccuracyBoost();
     this->setMaxHealth(this->getMaxHealth() - this->inventory[index]->getHpBoost());
+    if (this->getHealth() > this->getMaxHealth()) //incase the item made your max-hp lower
+    {
+        this->setHealth(this->getMaxHealth());
+    }
     this->wpmBoost -= this->inventory[index]->getWpmBoost();
 
     if (type == "armor")
@@ -166,23 +170,35 @@ std::string Player::unequipItem(int index)
 //Alright Rasmus?
 //FYI: void roundOver(); is a function inside ../items/consumables.h, you can call that with the help of a loop
 //checking if consumedPotionsList[i] != nullptr :)
-void Player::consumePotion(item& potion)
+void Player::consumePotion(int index)
 {
-    std::string type = "consumable";
-    std::string potName = potion.getName();
+    consumable* potPtr = dynamic_cast<consumable*>(this->inventory[index]);
+    std::string potName = potPtr->getName();
 
-    consumable* potionPtr = dynamic_cast<consumable*>(&potion);
-    for (int i = 0; i < itemCount; i++)
+    int hpAm = potPtr->getInstantHeal();
+
+    if (potName == "Healing Potion" || potName == "Big Healing Potion" )
     {
-        if (this->inventory[i]->getName() == potName)
+        double totalHealthAm = this->getHealth() + potPtr->getInstantHeal();
+        if (totalHealthAm > this->getMaxHealth())
         {
-            this->consumedPotionsList[potionsConsumedAmount] = new consumable(*potionPtr);
-            delete this->inventory[i];
-
-            arrayShifter(i, "inventory");
-            --itemCount;
+            this->setHealth(this->getMaxHealth());
+        } else
+        {
+            this->setHealth(totalHealthAm);
         }
+    } else
+    {
+        this->consumedPotionsList[potionsConsumedAmount] = new consumable(*potPtr);
+        this->wpmBoost += potPtr->getWpmBoost();
+        this->accBoost += potPtr->getAccuracyBoost();
+        this->setMaxHealth(this->getMaxHealth() + potPtr->getHpBoost());
     }
+    delete this->inventory[index];
+
+    arrayShifter(index, "inventory");
+    --itemCount;
+
     ++this->potionsConsumedAmount;
 }
 
@@ -206,7 +222,7 @@ void Player::arrayShifter(int index, std::string type)
     }
 }
 
-std::string Player::removePotionEffect()
+std::string Player::potionCheckValidity()
 {
     std::string potConcat = "";
     for (int i = 0; i < potionsConsumedAmount; i++)
@@ -218,6 +234,9 @@ std::string Player::removePotionEffect()
             this->accBoost -= this->consumedPotionsList[i]->getAccuracyBoost();
 
             potConcat += this->consumedPotionsList[i]->getName();
+        } else
+        {
+            this->consumedPotionsList[i]->roundOver();
         }
     }
     return "Potion effects cleared: " + potConcat;
@@ -248,6 +267,13 @@ void Player::printItems()
 {
     for (int i = 0; i < itemCount; i++)
     {
-        std::cout << "name: " + this->inventory[i]->getName() + " type: " + this->inventory[i]->getType() << std::endl;
+        std::cout << "index: [" << i << "], " <<"name: " + this->inventory[i]->getName() +
+            ", type: " + this->inventory[i]->getType() << std::endl;
     }
+}
+
+void Player::printStats()
+{
+    std::cout << "wpm boost: +" << this->wpmBoost << "wpm, accuracy boost: +"
+              << this->accBoost << "%, maxHP: " << std::to_string(this->getMaxHealth()) << std::endl;
 }

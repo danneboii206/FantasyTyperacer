@@ -5,8 +5,8 @@
 #include "dragonArmor.h"
 
 dragonArmor::dragonArmor()
-    : armor("Dragon Armor", "An armor fit for dragon slayers (+50 max HP)",
-        0, 0, 50)
+    : armor("Dragon Armor", "An armor fit for dragon slayers (+75 max HP, +5 WPM)",
+        LOW_WPM_BOOST, NO_ACC_BOOST, MEDIUM_HP_BOOST)
 {
 }
 
