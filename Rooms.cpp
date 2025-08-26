@@ -93,6 +93,7 @@ std::string Rooms::descriptionSelector()
 
     std::string selectedFile = filesInDirectory[randIndex];
     delete[] filesInDirectory;
+    filesInDirectory = nullptr;
 
     return selectedFile;
 }
