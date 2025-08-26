@@ -12,4 +12,17 @@ add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         characterCode/skeleton.cpp
         characterCode/skeleton.h
         characterCode/Player.cpp
-        characterCode/Player.h)
+        characterCode/Player.h
+        items/item.cpp
+        items/hpPotion.cpp
+        items/shinyStone.cpp
+        items/divineSword.cpp
+        items/dragonArmor.cpp
+        items/bigHpPotion.cpp
+        items/dungeonMastersSpear.cpp
+        items/weapon.cpp
+        items/consumable.cpp
+        items/armor.cpp
+        items/rasmusStick.cpp
+        items/accPotion.cpp
+)
