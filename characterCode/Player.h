@@ -10,13 +10,12 @@
 #include "../items/consumable.h"
 #include "../items/armor.h"
 #include "../items/weapon.h"
+
 #include <fstream>
 class Player : public Character
 {
 private:
     std::string filepath = "../data";
-
-
 
     double accBoost;
     double wpmBoost;
@@ -41,14 +40,15 @@ public:
     std::string unequipItem(int index);
     //it is an item as everything in the loop is thought of as an item. We cast it as
     //a consumable inside this function
-    void consumePotion(item& potion);
+    void consumePotion(int index);
     void arrayShifter(int index, std::string type);
-    std::string removePotionEffect();
+    std::string potionCheckValidity();
     double getAccBoost() const;
     double getWpmBoost() const;
     int getEquippedArmorIndex() const;
     int getEquippedWeaponIndex() const;
     //FOR TESTING, REMOVE B4 INLÄMNING
     void printItems();
+    void printStats();
 };
 #endif //PLAYER_H

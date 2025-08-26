@@ -5,8 +5,8 @@
 #include "armor.h"
 
 armor::armor(std::string itemName, std::string description,
-    double wpmBoost, double accuracyBoost, double hpBoost, std::string type)
-    : item(itemName, description, wpmBoost, accuracyBoost, hpBoost, type)
+    double wpmBoost, double accBoost, double hpBoost, std::string type)
+    : item(itemName, description, wpmBoost, accBoost, hpBoost, type)
 {
 }
 

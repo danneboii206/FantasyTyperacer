@@ -6,7 +6,8 @@
 #include <string>
 
 shinyStone::shinyStone()
-    : consumable("Shiny Stone", "Pretty stone! (does nothing)", 0, 0, 0, 0)
+    : consumable("Shiny Stone", "Pretty stone! (+5 HP by consuming it due to happiness)",
+        NO_WPM_BOOST, NO_ACC_BOOST, NO_HP_BOOST, ONE_TIME_USE, VERY_VERY_LOW_HEAL_AMOUNT)
 {
 }
 

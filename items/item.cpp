@@ -5,9 +5,9 @@
 #include "item.h"
 
 item::item(std::string itemName, std::string description,
-      double wpmBoost, double accuracyBoost, double hpBoost, std::string type)
+      double wpmBoost, double accBoost, double hpBoost, std::string type)
     : itemName(itemName), description(description), wpmBoost(wpmBoost),
-      accuracyBoost(accuracyBoost), hpBoost(hpBoost), type(type)
+      accBoost(accBoost), hpBoost(hpBoost), type(type)
 {
 }
 
@@ -37,7 +37,7 @@ double item::getWpmBoost() const
 
 double item::getAccuracyBoost() const
 {
-    return this->accuracyBoost;
+    return this->accBoost;
 }
 
 double item::getHpBoost() const
