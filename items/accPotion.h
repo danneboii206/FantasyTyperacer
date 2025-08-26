@@ -12,6 +12,7 @@ class accPotion : public consumable
 {
 public:
     accPotion();
+    ~accPotion() override;
 };
 
 

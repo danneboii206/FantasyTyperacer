@@ -10,13 +10,12 @@
 
 class consumable : public item
 {
-private:
-    std::string type = "consumable";
     int duration; //how many enemy rounds
 public:
     consumable() = delete;
     consumable(std::string itemName, std::string description, double wpmBoost,
-        double accuracyBoost, double hpBoost, int duration);
+        double accuracyBoost, double hpBoost, int duration, std::string type = "consumable");
+    ~consumable() override;
     void roundOver();
     int getDuration() const;
 };

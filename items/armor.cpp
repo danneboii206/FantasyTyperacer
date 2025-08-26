@@ -4,7 +4,12 @@
 
 #include "armor.h"
 
-armor::armor(std::string itemName, std::string description, double wpmBoost, double accuracyBoost, double hpBoost)
-    : item(itemName, description, wpmBoost, accuracyBoost, hpBoost)
+armor::armor(std::string itemName, std::string description,
+    double wpmBoost, double accuracyBoost, double hpBoost, std::string type)
+    : item(itemName, description, wpmBoost, accuracyBoost, hpBoost, type)
+{
+}
+
+armor::~armor()
 {
 }

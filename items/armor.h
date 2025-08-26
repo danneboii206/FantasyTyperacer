@@ -10,11 +10,11 @@
 
 class armor : public item
 {
-private:
-  std::string type = "armor";
 public:
     armor() = delete;
-    armor(std::string itemName, std::string description, double wpmBoost, double accuracyBoost, double hpBoost);
+    armor(std::string itemName, std::string description, double wpmBoost,
+          double accuracyBoost, double hpBoost, std::string type = "armor" );
+    ~armor() override;
 };
 
 

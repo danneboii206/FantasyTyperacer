@@ -10,11 +10,11 @@
 
 class weapon : public item
 {
-private:
-    std::string type = "weapon";
 public:
     weapon() = delete;
-    weapon(std::string itemName, std::string description, double wpmBoost, double accuracyBoost, double hpBoost);
+    weapon(std::string itemName, std::string description,
+        double wpmBoost, double accuracyBoost, double hpBoost, std::string type = "weapon");
+    ~weapon() override;
 };
 
 

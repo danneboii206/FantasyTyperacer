@@ -12,6 +12,7 @@ class divineSword : public weapon
 {
 public:
     divineSword();
+    ~divineSword() override;
 };
 
 

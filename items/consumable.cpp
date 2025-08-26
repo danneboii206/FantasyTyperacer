@@ -5,8 +5,12 @@
 #include "consumable.h"
 
 consumable::consumable(std::string itemName, std::string description, double wpmBoost, double accuracyBoost,
-    double hpBoost, int duration)
-        : item(itemName, description, wpmBoost, accuracyBoost, hpBoost), duration(duration)
+    double hpBoost, int duration, std::string type)
+        : item(itemName, description, wpmBoost, accuracyBoost, hpBoost, type), duration(duration)
+{
+}
+
+consumable::~consumable()
 {
 }
 

@@ -12,6 +12,7 @@ class dragonArmor : public armor
 {
 public:
     dragonArmor();
+    ~dragonArmor() override;
 };
 
 

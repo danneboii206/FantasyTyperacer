@@ -13,6 +13,7 @@ class dungeonMastersSpear : public weapon
 {
 public:
     dungeonMastersSpear();
+    ~dungeonMastersSpear() override;
 };
 
 

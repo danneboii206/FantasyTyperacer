@@ -12,6 +12,7 @@ class hpPotion : public consumable
 {
 public:
   hpPotion();
+  ~hpPotion() override;
 };
 
 

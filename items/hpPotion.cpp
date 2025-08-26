@@ -8,3 +8,7 @@ hpPotion::hpPotion()
     : consumable("Health Potion", "Heals you 50 HP", 0, 0, 50, 0)
 {
 }
+
+hpPotion::~hpPotion()
+{
+}

@@ -9,3 +9,7 @@ shinyStone::shinyStone()
     : consumable("Shiny Stone", "Pretty stone! (does nothing)", 0, 0, 0, 0)
 {
 }
+
+shinyStone::~shinyStone()
+{
+}

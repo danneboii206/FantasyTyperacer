@@ -9,3 +9,7 @@ accPotion::accPotion()
         0, 1.1, 0, 1)
 {
 }
+
+accPotion::~accPotion()
+{
+}

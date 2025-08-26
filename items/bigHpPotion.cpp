@@ -8,3 +8,7 @@ bigHpPotion::bigHpPotion()
     : consumable("Big HP Potion", "Heals 100 HP", 0, 0, 0, 0)
 {
 }
+
+bigHpPotion::~bigHpPotion()
+{
+}

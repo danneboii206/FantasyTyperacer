@@ -9,3 +9,7 @@ divineSword::divineSword()
 {
 
 }
+
+divineSword::~divineSword()
+{
+}

@@ -12,6 +12,7 @@ class rasmusStick : public weapon
 {
 public:
     rasmusStick();
+    ~rasmusStick() override;
 };
 
 

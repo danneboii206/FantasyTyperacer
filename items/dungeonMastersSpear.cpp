@@ -9,3 +9,7 @@ dungeonMastersSpear::dungeonMastersSpear()
         40, 0 ,0)
 {
 }
+
+dungeonMastersSpear::~dungeonMastersSpear()
+{
+}

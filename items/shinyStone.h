@@ -12,6 +12,7 @@ class shinyStone : public consumable
 {
 public:
   shinyStone();
+  ~shinyStone() override;
 };
 
 
