@@ -94,7 +94,6 @@ int main()
     std::cout << "max hp after: " + std::to_string(player.getMaxHealth()) << std::endl;
    //TODO: TRY OUT POTIONS!/////////////////////////////////////////////////////////////////////////
 */
-    Rooms room = Rooms();
 
 
 

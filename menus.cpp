@@ -7,6 +7,7 @@
 #include <string>
 #include "menus.h"
 #include "combat.h"
+#include "roomManager.h"
 #include "./characterCode/Player.h"
 #define prt(x) std::cout << x << std::endl
 
@@ -29,8 +30,8 @@ int printMainMenu()
     switch (input)
     {
         case 1:
-            combat();
-                break;
+        roomManager();
+            break;
 
         case 2:
 
