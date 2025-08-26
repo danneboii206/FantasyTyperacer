@@ -74,8 +74,8 @@ double typeRacer(Enemy& enemy,
     accuracyPercent = 1 - (static_cast<double>(wrongLetters) / lettersWritten);
     wordsPerMinute = wordsWritten / (totalTime.count() / 60);
     double multiplier = (accuracyPercent * 2); //multiplied by 2 so it feels more rewarding to have good accuracy
-    //damage = wordsPerMinute * multiplier;
-    damage = wordsPerMinute * multiplier + 100;
+    damage = wordsPerMinute * multiplier;
+    //damage = wordsPerMinute * multiplier + 100;
     enemy.takeDamage(damage);
 
     //prints for testing purposes
