@@ -18,6 +18,9 @@ Player::~Player()
         delete this->inventory[i];
         this->inventory[i] = nullptr;
     }
+
+    delete this->inventory;
+
     for (int i = 0; i < potionsConsumedAmount; i++)
     {
         delete this->consumedPotionsList[i];
