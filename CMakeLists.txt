@@ -27,4 +27,6 @@ add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         items/accPotion.cpp
         roomManager.cpp
         roomManager.h
+        characterCode/dragon.cpp
+        characterCode/dragon.h
 )

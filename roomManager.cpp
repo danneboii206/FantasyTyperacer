@@ -2,8 +2,10 @@
 // Created by rasmu on 2025-08-26.
 //
 #include "roomManager.h"
-
+#include "./characterCode/skeleton.h"
 #include <iostream>
+
+#include "characterCode/dragon.h"
 
 
 void roomManager()
@@ -13,20 +15,23 @@ void roomManager()
 
     for (int i = 0; i < roomCount; i++)
     {
+        std::cout << "room number: " << i << std::endl;
         Rooms room = Rooms();
         roomPrint(room);
         roomInput(room);
     }
+    combat(new Dragon());
 }
+
 
 void roomPrint(Rooms room)
 {
     printFile(room.getDescription());
     std::cout<< "\n" << "1: Proceed" << "\n";
-    std::cout<< "\n" << "2: Use item";
+    std::cout<< "\n" << "2: Use item" << "\n";
 }
 
-void roomInput(Rooms room)
+int roomInput(Rooms room)
 {
 
     int input = menuInput(2);
@@ -41,17 +46,39 @@ void roomInput(Rooms room)
         break;
 
     }
+    return 1;
 }
 
-void triggerEvent(Rooms room)
+int triggerEvent(Rooms room)
 {
     if (room.getHasEnemy() == true)
-        combat();
+    {
+        srand(time(NULL));
+        int rnd = rand() % 2;
+        Enemy* enemy = nullptr;
+        switch (rnd)
+        {
+            case 0:
+                enemy = new Goblin();
+            break;
 
-    finishRoom(room);
+            case 1:
+                enemy = new Skeleton();
+
+        }
+        combat(enemy);
+
+        enemy = nullptr;
+        delete enemy;
+        finishRoom(room);
+
+    }
+    std::cout << "test";
+    return 1;
 }
 
-void finishRoom(Rooms room)
+int finishRoom(Rooms room)
 {
     //give loot
+    return 1;
 }

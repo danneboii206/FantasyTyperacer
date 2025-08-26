@@ -9,7 +9,7 @@
 #include "characterCode/goblin.h"
 #include "characterCode/Player.h"
 
-void combat();
+int combat(Enemy* enemy);
 double typeRacer(Enemy& enemy,
     int& wordsWritten, int& lettersWritten, int& wrongLetters,
     double& damage, double& accuracyPercent, double& wordsPerMinute,
