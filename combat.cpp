@@ -11,7 +11,7 @@
 
 #define prt(x) std::cout << x << std::endl
 ///central method for combat which initiates the combat.
-void combat()
+int combat(Enemy* enemy)
 {
     int wordsWritten = 0;
     int lettersWritten = 0;
@@ -19,22 +19,8 @@ void combat()
     double damage = 0;
     double accuracyPercent = 0;
     double wordsPerMinute = 0;
-    srand(time(NULL));
-    int rnd = rand() % 2;
-    Enemy* enemy = nullptr;
+
     Player* player = new Player();
-    switch (rnd)
-    {
-        case 0:
-            enemy = new Goblin();
-            break;
-
-        case 1:
-            enemy = new Skeleton();
-
-
-
-    }
 
 
     bool inCombat = true;
@@ -59,7 +45,7 @@ void combat()
         prt("");
     }
 
-
+    return 1;
 }
 
 double typeRacer(Enemy& enemy,
@@ -88,7 +74,8 @@ double typeRacer(Enemy& enemy,
     accuracyPercent = 1 - (static_cast<double>(wrongLetters) / lettersWritten);
     wordsPerMinute = wordsWritten / (totalTime.count() / 60);
     double multiplier = (accuracyPercent * 2); //multiplied by 2 so it feels more rewarding to have good accuracy
-    damage = wordsPerMinute * multiplier;
+    //damage = wordsPerMinute * multiplier;
+    damage = wordsPerMinute * multiplier + 100;
     enemy.takeDamage(damage);
 
     //prints for testing purposes
