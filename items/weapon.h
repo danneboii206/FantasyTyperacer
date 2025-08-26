@@ -13,7 +13,7 @@ class weapon : public item
 public:
     weapon() = delete;
     weapon(std::string itemName, std::string description,
-        double wpmBoost, double accuracyBoost, double hpBoost, std::string type = "weapon");
+        double wpmBoost, double accBoost, double hpBoost, std::string type = "weapon");
     ~weapon() override;
 };
 

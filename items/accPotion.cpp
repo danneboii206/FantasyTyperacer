@@ -6,7 +6,7 @@
 
 accPotion::accPotion()
     : consumable("Accuracy Potion", "Increases accuracy by +10% for one round",
-        0, 1.1, 0, 1)
+        NO_WPM_BOOST, MEDIUM_ACC_BOOST, NO_HP_BOOST, DURATION_ONE_ROUND, NO_HEAL_AMOUNT)
 {
 }
 
