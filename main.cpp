@@ -3,6 +3,7 @@
 #include "menus.h"
 #include "combat.h"
 #include "./characterCode/goblin.h"
+#include "rooms.h"
 
 /* // TESTING PURPOSES
 #include "items/accPotion.h"
@@ -93,8 +94,14 @@ int main()
     std::cout << "max hp after: " + std::to_string(player.getMaxHealth()) << std::endl;
    //TODO: TRY OUT POTIONS!/////////////////////////////////////////////////////////////////////////
 */
+    Rooms room = Rooms();
+
+
+
     while (true)
     {
+
+
         printMainMenu();
 
     }
