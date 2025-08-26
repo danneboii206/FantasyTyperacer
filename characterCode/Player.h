@@ -16,9 +16,7 @@ class Player : public Character
 private:
     std::string filepath = "../data";
 
-    int itemCount;
-    int inventorySize = 10;
-    item **items = new item*[inventorySize];
+
 
     double accBoost;
     double wpmBoost;
@@ -26,7 +24,8 @@ private:
     int potionsConsumedAmount;
     int equippedArmorIndex;
     int equippedWeaponIndex;
-    item *inventory[10]{nullptr};
+    int inventorySize = 10;
+    item **inventory = new item*[inventorySize]{nullptr};
     consumable *consumedPotionsList[10]{nullptr};
 
 
