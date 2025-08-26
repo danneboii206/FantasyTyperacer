@@ -5,11 +5,13 @@
 #include <ctime>
 #include <fstream>
 #include <filesystem>
+#include "item.h"
 
 class Rooms {
 private:
+
   int itemCount = 0;
-  //Item *items = new Item[itemCount];
+  item **items;
   bool hasEnemy = false;
   std::string description;
   void generateRoom();

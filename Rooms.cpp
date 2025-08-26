@@ -9,11 +9,7 @@
 Rooms::Rooms()
 {
     generateRoom();
-
-
-
-
-
+    description = descriptionSelector();
 }
 
 void Rooms::generateRoom()
@@ -27,7 +23,12 @@ void Rooms::generateRoom()
 
     else itemCount = rand() % 2;
 
+    items = new item*[itemCount];
 
+    for (int i = 0; i < itemCount; i++)
+    {
+
+    }
 }
 
 std::string Rooms::descriptionSelector()

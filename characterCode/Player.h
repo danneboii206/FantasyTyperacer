@@ -6,13 +6,14 @@
 #define PLAYER_H
 #include "character.h"
 #include <fstream>
+#include "../item.h"
 class Player : public Character
 {
 private:
     std::string filepath = "../data";
-    //int itemCount
-    //int inventorySize = 10
-    //Item *items = new Item[inventorySize]
+    int itemCount;
+    int inventorySize = 10;
+    item **items = new item*[inventorySize];
 
 public:
     Player();
