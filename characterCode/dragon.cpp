@@ -13,3 +13,7 @@ Dragon::Dragon()
     setMaxHealth(200);
     setHealth(200);
 }
+
+Dragon::~Dragon()
+{
+}

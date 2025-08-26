@@ -17,8 +17,9 @@
 
 int main()
 {
-/*
+
 //for testing purposes
+    /*
     int nrOfItems = 5;
     item* items[nrOfItems];
     items[0] = new accPotion;
@@ -50,7 +51,7 @@ int main()
     //testing how inventory acts when an object is removed
     std::cout << "--removing from inventory items[0] (acc_potion)";
     std::cout << "---------------------------" << std::endl;
-    player.removeItemFromInventory(*items[0]);
+    player.removeItemFromInventory(0);
     std::cout << "--printing inventory objects" << std::endl;
     player.printItems();
 
@@ -151,7 +152,6 @@ int main()
         delete items[i];
     }
 
-   //TODO: TRY OUT POTIONS!/////////////////////////////////////////////////////////////////////////
 */
     Rooms room = Rooms();
 
@@ -159,10 +159,7 @@ int main()
 
     while (true)
     {
-
-
         printMainMenu();
-
     }
 
     return 0;

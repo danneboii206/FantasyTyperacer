@@ -14,6 +14,10 @@ Enemy::Enemy(): damage(10)
 {
 }
 
+Enemy::~Enemy()
+{
+}
+
 void Enemy::setName(std::string name)
 {
   this->name = name;

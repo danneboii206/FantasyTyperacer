@@ -10,7 +10,7 @@
 class Skeleton : public Enemy {
     public:
     Skeleton();
-    virtual ~Skeleton();
+    ~Skeleton() override;
 };
 
 

@@ -18,8 +18,9 @@ private:
     double damage;
 
 public:
-    explicit Enemy(double damage, double maxHealth);
+    Enemy(double damage, double maxHealth);
     Enemy();
+    virtual ~Enemy();
     void setName(std::string name);
     void setDescription(std::string description);
     void setArt(std::string art);

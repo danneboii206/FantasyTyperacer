@@ -13,6 +13,11 @@ Character::Character():maxHealth(40)
 {
     health = maxHealth;
 }
+
+Character::~Character()
+{
+}
+
 void Character::takeDamage(const double damage)
 {
     health -= damage;

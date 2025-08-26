@@ -13,3 +13,7 @@ Goblin::Goblin()
     setMaxHealth(100);
     setHealth(100);
 }
+
+Goblin::~Goblin()
+{
+}

@@ -10,6 +10,8 @@
 #include "../items/consumable.h"
 #include "../items/armor.h"
 #include "../items/weapon.h"
+#include <vector>
+#include <memory>
 
 #include <fstream>
 class Player : public Character
@@ -24,24 +26,22 @@ private:
     int equippedArmorIndex;
     int equippedWeaponIndex;
     int inventorySize = 10;
-    item **inventory = new item*[inventorySize]{nullptr};
-    consumable *consumedPotionsList[10]{nullptr};
-
+    std::vector<std::unique_ptr<item>> inventory;
+    std::vector<std::unique_ptr<consumable>> consumedPotionsList;
 
 public:
     Player();
-    ~Player();
+    ~Player() override;
     void savePlayerData();
     void loadPlayerData();
     void resetPlayerData();
     std::string addItemToInventory(item& Item);
-    std::string removeItemFromInventory(item& Item);
+    std::string removeItemFromInventory(int index);
     std::string equipItem(int index);
     std::string unequipItem(int index);
     //it is an item as everything in the loop is thought of as an item. We cast it as
     //a consumable inside this function
     void consumePotion(int index);
-    void arrayShifter(int index, std::string type);
     std::string potionCheckValidity();
     double getAccBoost() const;
     double getWpmBoost() const;

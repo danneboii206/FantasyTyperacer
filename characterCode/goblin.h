@@ -12,6 +12,7 @@ class Goblin : public Enemy
 {
     public:
     Goblin();
+    ~Goblin() override;
 };
 
 

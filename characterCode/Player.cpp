@@ -13,20 +13,6 @@ Player::Player()
 
 Player::~Player()
 {
-    for (int i = 0; i < itemCount; i++)
-    {
-        delete this->inventory[i];
-        this->inventory[i] = nullptr;
-    }
-
-    delete[] this->inventory;
-
-    for (int i = 0; i < potionsConsumedAmount; i++)
-    {
-        delete this->consumedPotionsList[i];
-        this->consumedPotionsList[i] = nullptr;
-    }
-
     std::cout<<"destroying player"; //for testing purposes
 }
 
@@ -77,17 +63,17 @@ std::string Player::addItemToInventory(item& Item)
     //first check if there is space
     if (this->itemCount == 10)
     {
-        return "Space is full!";
+        return "Space is full! Consider dropping an item";
     }
 
     if (Item.getType() == "consumable")
     {   //due to consumable being the only one with extra data (duration), everything else is just an item basically.
         consumable* potionPtr = dynamic_cast<consumable*>(&Item);
 
-        inventory[itemCount] = new consumable(*potionPtr);
+        inventory.push_back(std::make_unique<consumable>(*potionPtr));
     } else
     {
-        inventory[itemCount] = new item(Item);
+        inventory.push_back(std::make_unique<item>(Item));
     }
 
     ++itemCount;
@@ -95,21 +81,14 @@ std::string Player::addItemToInventory(item& Item)
     return "Picked up item: " + inventory[itemCount - 1]->getName() + ".";
 }
 
-std::string Player::removeItemFromInventory(item& Item)
+std::string Player::removeItemFromInventory(int index)
 {
-    std::string itemToRemove = Item.getName();
-    for (int i = 0; i < itemCount; i++)
-    {
-        if (this->inventory[i]->getName() == itemToRemove)
-        {
-            delete this->inventory[i];
-            this->inventory[i] = nullptr;
-            arrayShifter(i, "inventory");
-            --this->itemCount;
-            return "Dropped " + itemToRemove + ".";
-        }
-    }
-    return "Item not found"; //should not ever happen
+    std::string itemName = inventory[index]->getName();
+
+    inventory.erase(inventory.begin() + index);
+    --this->itemCount;
+
+    return "Dropped item: " + itemName + ".";
 }
 
 std::string Player::equipItem(int index)
@@ -172,59 +151,36 @@ std::string Player::unequipItem(int index)
 //checking if consumedPotionsList[i] != nullptr :)
 void Player::consumePotion(int index)
 {
-    consumable* potPtr = dynamic_cast<consumable*>(this->inventory[index]);
+    consumable* potPtr = dynamic_cast<consumable*>(this->inventory[index].get());
     std::string potName = potPtr->getName();
-
-    int hpAm = potPtr->getInstantHeal();
 
     if (potName == "Healing Potion" || potName == "Big Healing Potion" )
     {
-        double totalHealthAm = this->getHealth() + potPtr->getInstantHeal();
-        if (totalHealthAm > this->getMaxHealth())
+        double hpAm = potPtr->getInstantHeal();
+        double hpFinal = this->getHealth() + hpAm;
+
+        if (hpFinal > this->getMaxHealth())
         {
             this->setHealth(this->getMaxHealth());
         } else
         {
-            this->setHealth(totalHealthAm);
+            this->setHealth(hpFinal);
         }
     } else
     {
-        this->consumedPotionsList[potionsConsumedAmount] = new consumable(*potPtr);
+        consumedPotionsList.push_back(std::make_unique<consumable>(*potPtr));
         this->wpmBoost += potPtr->getWpmBoost();
         this->accBoost += potPtr->getAccuracyBoost();
         this->setMaxHealth(this->getMaxHealth() + potPtr->getHpBoost());
     }
-    delete this->inventory[index];
-
-    arrayShifter(index, "inventory");
-    --itemCount;
+    this->removeItemFromInventory(index);
 
     ++this->potionsConsumedAmount;
 }
 
-void Player::arrayShifter(int index, std::string type)
-{
-    if (type == "inventory")
-    {
-        for (int i = index; i < itemCount; i++)
-        {
-            inventory[i] = inventory[i + 1]; //replaces the one that's currently here with the one that's next
-        }
-        inventory[itemCount - 1] = nullptr; //so the last one doesn't repeat twice
-    }
-    else if (type == "potions")
-    {
-        for (int i = index; i < itemCount; i++)
-        {
-            consumedPotionsList[i] = consumedPotionsList[i + 1]; //replaces the one that's currently here with the one that's next
-        }
-        consumedPotionsList[itemCount - 1] = nullptr; //so the last one doesn't repeat twice
-    }
-}
-
 std::string Player::potionCheckValidity()
 {
-    std::string potConcat = "";
+    std::string potConcat;
     for (int i = 0; i < potionsConsumedAmount; i++)
     {
         if (this->consumedPotionsList[i]->getDuration() == 0)
@@ -237,6 +193,7 @@ std::string Player::potionCheckValidity()
         } else
         {
             this->consumedPotionsList[i]->roundOver();
+            return potConcat;
         }
     }
     return "Potion effects cleared: " + potConcat;
