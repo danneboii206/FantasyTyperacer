@@ -5,7 +5,7 @@
 #include <iostream>
 
 Player::Player()
-    : accBoost(0), wpmBoost(0), itemCount(0), potionsConsumedAmount(0),
+    : accBoost(0), wpmBoost(0), potionsConsumedAmount(0),
       equippedArmorIndex(-1), equippedWeaponIndex(-1)
 {
     loadPlayerData();
@@ -61,7 +61,7 @@ void Player::resetPlayerData()
 std::string Player::addItemToInventory(item& Item)
 {
     //first check if there is space
-    if (this->itemCount == 10)
+    if (this->inventory.size() == MAX_INVENTORY_SIZE)
     {
         return "Space is full! Consider dropping an item";
     }
@@ -76,9 +76,7 @@ std::string Player::addItemToInventory(item& Item)
         inventory.push_back(std::make_unique<item>(Item));
     }
 
-    ++itemCount;
-
-    return "Picked up item: " + inventory[itemCount - 1]->getName() + ".";
+    return "Picked up item: " + this->inventory[this->inventory.size() - 1]->getName() + ".";
 }
 
 std::string Player::removeItemFromInventory(int index)
@@ -86,7 +84,6 @@ std::string Player::removeItemFromInventory(int index)
     std::string itemName = inventory[index]->getName();
 
     inventory.erase(inventory.begin() + index);
-    --this->itemCount;
 
     return "Dropped item: " + itemName + ".";
 }
@@ -220,16 +217,16 @@ int Player::getEquippedWeaponIndex() const
 }
 
 //STRICTLY FOR TESTING, REMOVE B4 INLÄMNING
-void Player::printItems()
+void Player::printItems() const
 {
-    for (int i = 0; i < itemCount; i++)
+    for (int i = 0; i < this->inventory.size(); i++)
     {
         std::cout << "index: [" << i << "], " <<"name: " + this->inventory[i]->getName() +
             ", type: " + this->inventory[i]->getType() << std::endl;
     }
 }
 
-void Player::printStats()
+void Player::printStats() const
 {
     std::cout << "wpm boost: +" << this->wpmBoost << "wpm, accuracy boost: +"
               << this->accBoost << "%, maxHP: " << std::to_string(this->getMaxHealth()) << std::endl;

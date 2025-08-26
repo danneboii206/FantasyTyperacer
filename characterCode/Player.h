@@ -21,11 +21,10 @@ private:
 
     double accBoost;
     double wpmBoost;
-    int itemCount;
     int potionsConsumedAmount;
     int equippedArmorIndex;
     int equippedWeaponIndex;
-    int inventorySize = 10;
+    const int MAX_INVENTORY_SIZE = 10;
     std::vector<std::unique_ptr<item>> inventory;
     std::vector<std::unique_ptr<consumable>> consumedPotionsList;
 
@@ -48,7 +47,7 @@ public:
     int getEquippedArmorIndex() const;
     int getEquippedWeaponIndex() const;
     //FOR TESTING, REMOVE B4 INLÄMNING
-    void printItems();
-    void printStats();
+    void printItems() const;
+    void printStats() const;
 };
 #endif //PLAYER_H

@@ -11,37 +11,18 @@ Rooms::Rooms()
 {
     generateRoom();
     description = descriptionSelector();
-/*
-    for (int i = 0; i < itemCount; i++)
-    {
-        std::cout << items[i]->getName() << std::endl;
-    }
-    */
 }
 
 Rooms::~Rooms()
 {
-    for (int i = 0; i < individualItems; i++)
-    {
-        itemList[i] = nullptr;
-        delete itemList[i];
-    }
-    delete[] itemList;
-
-    for (int i = 0; i < itemCount; i++)
-    {
-        items[i] = nullptr;
-        delete items[i];
-    }
-    delete[] items;
-
-
 }
 
+/*
 item** Rooms::getItems()
 {
-    return itemList;
+    return roomItems;
 }
+*/
 
 bool Rooms::getHasEnemy()
 {
@@ -77,12 +58,10 @@ void Rooms::generateRoom()
     if (itemCount == 0)
         return;
 
-    items = new item*[itemCount]{nullptr};
-
     for (int i = 0; i < itemCount; i++)
     {
-        items[i] = itemList[rand() % (individualItems - 1)];
-        //std::cout << items[i]->getName() << std::endl;
+        int randIndex = rand() % (allItems.size() - 1);
+        roomItems.push_back(allItems[randIndex]);
     }
 }
 
