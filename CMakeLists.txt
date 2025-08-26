@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 
-add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp rooms.cpp
+add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         characterCode/character.cpp
         characterCode/enemy.cpp
         characterCode/goblin.cpp

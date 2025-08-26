@@ -2,12 +2,23 @@
 #define ROOMS_H
 
 #include <string>
+#include <ctime>
+#include <fstream>
+#include <filesystem>
+#include "item.h"
 
-class rooms {
+class Rooms {
 private:
-  std::string name;
+
+  int itemCount = 0;
+  item **items;
+  bool hasEnemy = false;
   std::string description;
+  void generateRoom();
+  std::string descriptionSelector();
 public:
+  Rooms();
+
 };
 
 

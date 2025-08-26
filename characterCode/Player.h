@@ -11,13 +11,15 @@
 #include "../items/armor.h"
 #include "../items/weapon.h"
 #include <fstream>
-
-const int inventorySize = 10;
-
 class Player : public Character
 {
 private:
     std::string filepath = "../data";
+
+    int itemCount;
+    int inventorySize = 10;
+    item **items = new item*[inventorySize];
+
     double accBoost;
     double wpmBoost;
     int itemCount;
@@ -26,6 +28,7 @@ private:
     int equippedWeaponIndex;
     item *inventory[10]{nullptr};
     consumable *consumedPotionsList[10]{nullptr};
+
 
 public:
     Player();
