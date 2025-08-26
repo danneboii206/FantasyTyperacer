@@ -5,29 +5,69 @@
 #include "rooms.h"
 #include <iostream>
 #include <fstream>
+#include <random>
 
 Rooms::Rooms()
 {
     generateRoom();
     description = descriptionSelector();
+/*
+    for (int i = 0; i < itemCount; i++)
+    {
+        std::cout << items[i]->getName() << std::endl;
+    }
+    */
 }
 
-void Rooms::generateRoom()
+Rooms::~Rooms()
 {
-    srand(time(nullptr));
-
-    hasEnemy = rand() % 1;
-
-    if (hasEnemy == true)
-        itemCount = rand() % 3 + 1;
-
-    else itemCount = rand() % 2;
-
-    items = new item*[itemCount];
+    for (int i = 0; i < individualItems; i++)
+    {
+        itemList[i] = nullptr;
+        delete itemList[i];
+    }
+    delete[] itemList;
 
     for (int i = 0; i < itemCount; i++)
     {
+        items[i] = nullptr;
+        delete items[i];
+    }
+    delete[] items;
 
+
+}
+
+void Rooms::generateRoom()
+
+{
+    //srand(time(nullptr));
+    //std::random_device rd;
+    //std::mt19937 gen(rd());
+    //std::uniform_int_distribution<int> distr1(0, 1);
+
+    srand(time(nullptr));
+
+    hasEnemy = rand() % 2;
+
+
+
+    if (hasEnemy == true)
+
+
+        itemCount = rand() % 4 + 1;
+
+    else itemCount = rand() % 3;
+
+    if (itemCount == 0)
+        return;
+
+    items = new item*[itemCount]{nullptr};
+
+    for (int i = 0; i < itemCount; i++)
+    {
+        items[i] = itemList[rand() % (individualItems - 1)];
+        //std::cout << items[i]->getName() << std::endl;
     }
 }
 
