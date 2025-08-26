@@ -38,6 +38,21 @@ Rooms::~Rooms()
 
 }
 
+item** Rooms::getItems()
+{
+    return itemList;
+}
+
+bool Rooms::getHasEnemy()
+{
+    return hasEnemy;
+}
+
+std::string Rooms::getDescription()
+{
+    return description;
+}
+
 void Rooms::generateRoom()
 
 {

@@ -25,6 +25,9 @@ private:
   void generateRoom();
   std::string descriptionSelector();
 public:
+  item** getItems();
+  bool getHasEnemy();
+  std::string getDescription();
 
   Rooms();
   ~Rooms();

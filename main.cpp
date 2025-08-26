@@ -17,7 +17,7 @@
 
 int main()
 {
-
+/*
 //for testing purposes
     int nrOfItems = 5;
     item* items[nrOfItems];
@@ -152,7 +152,7 @@ int main()
     }
 
    //TODO: TRY OUT POTIONS!/////////////////////////////////////////////////////////////////////////
-/*
+*/
     Rooms room = Rooms();
 
 
@@ -165,9 +165,6 @@ int main()
 
     }
 
-
-
-*/
     return 0;
 }
 
