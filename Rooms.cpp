@@ -51,12 +51,12 @@ void Rooms::generateRoom()
     if (hasEnemy == true)
 
 
-        itemCount = rand() % 4 + 1;
+        itemCount = rand() % 3 + 1;
 
     else itemCount = rand() % 3;
 
-    itemCount = 3;
-    hasEnemy = false;
+    //itemCount = 3;
+    //hasEnemy = false;
 
     if (itemCount == 0)
         return;

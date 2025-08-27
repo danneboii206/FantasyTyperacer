@@ -235,9 +235,11 @@ void Player::printStats() const
               << this->accBoost << "%, maxHP: " << std::to_string(this->getMaxHealth()) << std::endl;
 }
 
-item Player::getItemAtIndex(int index) const
+item* Player::getItemAtIndex(int index) const
 {
-    return *this->inventory[index].get();
+    if (index >= this->inventory.size())
+        return nullptr;
+    return this->inventory[index].get();
 }
 
 int Player::getMAX_INVENTORY_SIZE()

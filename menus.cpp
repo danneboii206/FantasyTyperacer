@@ -147,8 +147,8 @@ void openInventory(Player& player)
     {
 
 
-        item itemTest = player.getItemAtIndex(1);
-        clearScreen()   ;
+        item* itemTest = player.getItemAtIndex(1);
+        clearScreen();
 
         std::cout << "\n";
         std::cout << "type the corresponding number to interact with the item" << "\n";
@@ -159,14 +159,16 @@ void openInventory(Player& player)
         for (int i = 0; i < itemCount; i++)
         {
             auto item = player.getItemAtIndex(i);
-           /* if (item == nullptr)
+            if (item == nullptr)
             {
-                std::cout<< "\n" << i+1 << "empty" << "\n";
-W
-                break;
+                std::cout<< "\n" << i+1 << ": empty" << "\n";
 
-            }*/
-            std::cout<< "\n" << i+1 << ": select " << item.getName() << "\n";
+            }
+            else
+            {
+                std::cout<< "\n" << i+1 << ": select " << item->getName() << "\n";
+
+            }
             menuChoices++;
 
         }
@@ -181,19 +183,57 @@ W
         //item& itemCopy = *player.getItemAtIndex(input-1);
         //std::cout << itemCopy.getName();
 
-        /* for (int i = 0; i < menuChoices; i++)
+         for (int i = 0; i < menuChoices; i++)
          {
              std::cout << "\n" << i << "\n";
-             if (i == input + 1)
+             if (i == input - 1)
              {
-                 item itemCopy = *room.getItemAtIndex(i);
-                 player.addItemToInventory(itemCopy);
-                 std::cout << itemCopy.getName();
+                 interactWithItem(player, i);
 
              }
-         }*/
+         }
 
 
     }
+
+}
+
+void interactWithItem(Player& player, int index)
+{
+
+
+
+    clearScreen();
+        if (player.getItemAtIndex(index) == nullptr)
+        {
+            std::cout << "\n there is no item. \n";
+            std::cout << "press enter to return\n";
+            menuInput(1);
+
+            return;
+        }
+    std::string type = player.getItemAtIndex(index)->getType();
+
+    std::cout << "\n" << player.getItemAtIndex(index)->getName() << "\n";
+    std::cout << "\n" << player.getItemAtIndex(index)->getDescription() << "\n";
+    std::cout << "\n" << "type: " << type << "\n";
+
+    std::cout << "\n" << "1: use item" << "\n";
+    std::cout<< "\n" << "2: discard item" << "\n";
+    std::cout << "\n" << "2: leave" << "\n";
+
+    int input = menuInput(3);
+
+    if (input == 1)
+    {
+        if (type == "consumable")
+            player.consumePotion(index);
+        else
+            player.equipItem(index);
+    }
+    else if (input == 2)
+        player.removeItemFromInventory(index);
+    else
+        return;
 
 }

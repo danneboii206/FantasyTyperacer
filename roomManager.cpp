@@ -10,17 +10,20 @@
 
 void roomManager()
 {
+
     Player player = Player();
-    int roomCount = 10; //amount of rooms to explore before the boss is encountered
+    int roomCount = 2; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
         std::cout << "room number: " << i << std::endl;
         Rooms room = Rooms();
         roomPrint(room);
+
         roomInput(room, player);
     }
     combat(new Dragon(), player);
+    printFile("../Art/winText.txt");
 }
 
 
@@ -84,6 +87,12 @@ int finishRoom(Rooms room, Player& player)
     std::vector<std::shared_ptr<item>> roomItems;
     int itemCount = room.getItemCount();
 
+    for (int i = 0; i < itemCount; i++)
+    {
+        roomItems.push_back(room.getItemAtIndex(i));
+    }
+
+
     while (true)
     {
 
@@ -96,10 +105,6 @@ int finishRoom(Rooms room, Player& player)
         else
             std::cout << "\n you may pick any number of these items: \n";
 
-        for (int i = 0; i < itemCount; i++)
-        {
-            roomItems.push_back(room.getItemAtIndex(i));
-        }
 
         for (int i = 0; i < itemCount; i++)
         {
@@ -118,12 +123,12 @@ int finishRoom(Rooms room, Player& player)
         if (input == menuChoices+1)
             return 1;
 
-        item& itemCopy = *room.getItemAtIndex(input-1);
+
+        player.addItemToInventory(*roomItems[input-1]);
         roomItems.erase(roomItems.begin() + input-1);
         itemCount--;
-        player.addItemToInventory(itemCopy);
+
         player.printItems();
-        std::cout << itemCopy.getName();
 
            /* for (int i = 0; i < menuChoices; i++)
             {

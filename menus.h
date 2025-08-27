@@ -13,5 +13,6 @@ bool isNumber(std::string input);
 void printFile(std::string filePath);
 void clearScreen();
 void openInventory(Player& player);
+void interactWithItem(Player& player, int index);
 
 #endif //MENUS_H
