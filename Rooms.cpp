@@ -55,6 +55,9 @@ void Rooms::generateRoom()
 
     else itemCount = rand() % 3;
 
+    itemCount = 3;
+    hasEnemy = false;
+
     if (itemCount == 0)
         return;
 
@@ -96,4 +99,18 @@ std::string Rooms::descriptionSelector()
     filesInDirectory = nullptr;
 
     return selectedFile;
+}
+
+int Rooms::getItemCount()
+{
+    return itemCount;
+}
+
+std::shared_ptr<item> Rooms::getItemAtIndex(int index)
+{
+    if (index >= itemCount)
+        return nullptr;
+
+    return roomItems[index];
+
 }

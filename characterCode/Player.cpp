@@ -18,6 +18,7 @@ Player::~Player()
 
 void Player::savePlayerData()
 {
+    //obsolete
     std::string maxHp = std::to_string(this->getMaxHealth());
     std::string Hp = std::to_string(this->getHealth());
 
@@ -30,6 +31,7 @@ void Player::savePlayerData()
 
 void Player::loadPlayerData()
 {
+    //obsolete
     std::ifstream saveFile(this->filepath + "/PlayerData.txt");
     std::string line;
 
@@ -51,6 +53,7 @@ void Player::loadPlayerData()
 
 void Player::resetPlayerData()
 {
+    //obsolete
     std::ofstream saveFile(this->filepath + "/PlayerData.txt");
     saveFile << 200 << std::endl;
     saveFile << 200 << std::endl;
@@ -216,7 +219,6 @@ int Player::getEquippedWeaponIndex() const
     return this->equippedWeaponIndex;
 }
 
-//STRICTLY FOR TESTING, REMOVE B4 INLÄMNING
 void Player::printItems() const
 {
     for (int i = 0; i < this->inventory.size(); i++)
@@ -226,8 +228,20 @@ void Player::printItems() const
     }
 }
 
+//STRICTLY FOR TESTING, REMOVE B4 INLÄMNING
 void Player::printStats() const
 {
     std::cout << "wpm boost: +" << this->wpmBoost << "wpm, accuracy boost: +"
               << this->accBoost << "%, maxHP: " << std::to_string(this->getMaxHealth()) << std::endl;
 }
+
+item Player::getItemAtIndex(int index) const
+{
+    return *this->inventory[index].get();
+}
+
+int Player::getMAX_INVENTORY_SIZE()
+{
+    return this->MAX_INVENTORY_SIZE;
+}
+

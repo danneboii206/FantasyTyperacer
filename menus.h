@@ -3,7 +3,7 @@
 //
 
 #include <string>
-
+#include "./characterCode/Player.h"
 #ifndef MENUS_H
 #define MENUS_H
 
@@ -12,4 +12,6 @@ int menuInput(int menuChoices);
 bool isNumber(std::string input);
 void printFile(std::string filePath);
 void clearScreen();
+void openInventory(Player& player);
+
 #endif //MENUS_H
