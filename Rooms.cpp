@@ -30,12 +30,12 @@ item** Rooms::getItems()
 }
 */
 
-bool Rooms::getHasEnemy()
+bool Rooms::getHasEnemy() const
 {
     return hasEnemy;
 }
 
-std::string Rooms::getDescription()
+std::string Rooms::getDescription() const
 {
     return description;
 }
@@ -107,12 +107,12 @@ std::string Rooms::descriptionSelector()
     return selectedFile;
 }
 
-int Rooms::getItemCount()
+int Rooms::getItemCount() const
 {
     return itemCount;
 }
 
-std::shared_ptr<item> Rooms::getItemAtIndex(int index)
+std::shared_ptr<item> Rooms::getItemAtIndex(int index) const
 {
     if (index >= itemCount)
         return nullptr;

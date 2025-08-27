@@ -18,10 +18,10 @@ private:
 public:
   Rooms();
   ~Rooms();
-  bool getHasEnemy();
-  std::string getDescription();
-  int getItemCount();
-  std::shared_ptr<item> getItemAtIndex(int index);
+  bool getHasEnemy() const;
+  std::string getDescription() const;
+  int getItemCount() const;
+  std::shared_ptr<item> getItemAtIndex(int index) const;
 };
 
 
