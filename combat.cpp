@@ -174,6 +174,13 @@ int lineAccuracy(std::string line1, std::string line2)
     return incorrectLetters;
 }
 
+void printOptions(Player & player)
+{
+    clearScreen();
+    prt("would you like to use an item)");
+    player.printItems();
+}
+
 void printBattle(Enemy enemy, std::string line, Player& player)
 {
     clearScreen();

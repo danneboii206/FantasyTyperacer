@@ -135,3 +135,65 @@ bool isNumber(const std::string input)
     }
     return true; //incase for-loop continued (isdigit = true)
 }
+
+//prints information about a given item
+void openInventory(Player& player)
+{
+
+    std::vector<std::shared_ptr<item>> playerItems;
+    int itemCount = player.getMAX_INVENTORY_SIZE();
+
+    while (true)
+    {
+
+
+        item itemTest = player.getItemAtIndex(1);
+        clearScreen()   ;
+
+        std::cout << "\n";
+        std::cout << "type the corresponding number to interact with the item" << "\n";
+        //give loot
+        int menuChoices = 0;
+
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            auto item = player.getItemAtIndex(i);
+           /* if (item == nullptr)
+            {
+                std::cout<< "\n" << i+1 << "empty" << "\n";
+W
+                break;
+
+            }*/
+            std::cout<< "\n" << i+1 << ": select " << item.getName() << "\n";
+            menuChoices++;
+
+        }
+
+        std::cout<< "\n" << menuChoices+1 << ": leave" << "\n";
+        int input = menuInput(menuChoices + 1);
+        std::cout << input;
+
+        if (input == menuChoices+1)
+            return;
+
+        //item& itemCopy = *player.getItemAtIndex(input-1);
+        //std::cout << itemCopy.getName();
+
+        /* for (int i = 0; i < menuChoices; i++)
+         {
+             std::cout << "\n" << i << "\n";
+             if (i == input + 1)
+             {
+                 item itemCopy = *room.getItemAtIndex(i);
+                 player.addItemToInventory(itemCopy);
+                 std::cout << itemCopy.getName();
+
+             }
+         }*/
+
+
+    }
+
+}

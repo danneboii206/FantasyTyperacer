@@ -26,6 +26,7 @@ void roomManager()
 
 void roomPrint(Rooms room)
 {
+    clearScreen();
     printFile(room.getDescription());
     std::cout<< "\n" << "1: Proceed" << "\n";
     std::cout<< "\n" << "2: Use item" << "\n";
@@ -42,7 +43,7 @@ int roomInput(Rooms room, Player& player)
         break;
 
         case 2:
-            //use item
+            openInventory(player);
         break;
 
     }
@@ -70,15 +71,73 @@ int triggerEvent(Rooms room, Player& player)
 
         enemy = nullptr;
         delete enemy;
-        finishRoom(room, player);
+
 
     }
+    finishRoom(room, player);
     std::cout << "test";
     return 1;
 }
 
 int finishRoom(Rooms room, Player& player)
 {
-    //give loot
+    std::vector<std::shared_ptr<item>> roomItems;
+    int itemCount = room.getItemCount();
+
+    while (true)
+    {
+
+        //give loot
+        int menuChoices = 0;
+        clearScreen();
+
+        if (itemCount == 0)
+            std::cout << " \n There are no items to pick up \n";
+        else
+            std::cout << "\n you may pick any number of these items: \n";
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            roomItems.push_back(room.getItemAtIndex(i));
+        }
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            auto item = roomItems[i];
+            if (item == nullptr)
+                break;
+            std::cout<< "\n" << i+1 << ": take " << item->getName() << "\n";
+            menuChoices++;
+
+        }
+
+        std::cout<< "\n" << menuChoices+1 << ": leave" << "\n";
+        int input = menuInput(menuChoices + 1);
+        std::cout << input;
+
+        if (input == menuChoices+1)
+            return 1;
+
+        item& itemCopy = *room.getItemAtIndex(input-1);
+        roomItems.erase(roomItems.begin() + input-1);
+        itemCount--;
+        player.addItemToInventory(itemCopy);
+        player.printItems();
+        std::cout << itemCopy.getName();
+
+           /* for (int i = 0; i < menuChoices; i++)
+            {
+                std::cout << "\n" << i << "\n";
+                if (i == input + 1)
+                {
+                    item itemCopy = *room.getItemAtIndex(i);
+                    player.addItemToInventory(itemCopy);
+                    std::cout << itemCopy.getName();
+
+                }
+            }*/
+
+
+    }
     return 1;
 }

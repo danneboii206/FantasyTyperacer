@@ -29,6 +29,8 @@ public:
   //item** getItems();
   bool getHasEnemy();
   std::string getDescription();
+  int getItemCount();
+  std::shared_ptr<item> getItemAtIndex(int index);
 
   Rooms();
   ~Rooms();
