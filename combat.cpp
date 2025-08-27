@@ -26,7 +26,20 @@ int combat(Enemy* enemy, Player& player)
     bool inCombat = true;
     while(inCombat == true)
     {
-        typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute, player);
+        printFile(enemy->getArt());
+        std::cout << enemy->getName() << ": " << enemy->getHealth() << "/" << enemy->getMaxHealth() << " hp" << std::endl;
+        printFile(enemy->getDescription());
+        prt("Would you like to:");
+        prt("1: Attack");
+        prt("2: Use item");
+
+        int input = menuInput(2);
+
+        if (input == 1)
+            typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute, player);
+
+        if (input == 2)
+            openInventory(player);
 
         if (enemy->getHealth() <= 0)
             inCombat = false;
@@ -34,6 +47,7 @@ int combat(Enemy* enemy, Player& player)
         player.takeDamage(enemy->getDamage());
         //player.savePlayerData();
         //prints for testing purposes
+        /*
         prt("Combat()");
         prt("words written: " << wordsWritten);
         prt("wpm: " << wordsPerMinute);
@@ -43,10 +57,12 @@ int combat(Enemy* enemy, Player& player)
         prt("accuracy: " << accuracyPercent * 100 << "%");
         prt("damage: " << damage);
         prt("");
+        */
     }
 
     return 1;
 }
+
 
 double typeRacer(Enemy& enemy,
     int& wordsWritten, int& lettersWritten, int& wrongLetters,
@@ -72,13 +88,15 @@ double typeRacer(Enemy& enemy,
     lyrics.clear();
     lyrics.seekg(0, std::ios::beg);
     accuracyPercent = 1 - (static_cast<double>(wrongLetters) / lettersWritten);
-    wordsPerMinute = wordsWritten / (totalTime.count() / 60);
-    double multiplier = (accuracyPercent * 2); //multiplied by 2 so it feels more rewarding to have good accuracy
+
+    wordsPerMinute = wordsWritten / (totalTime.count() / 60 ) + player.getWpmBoost();
+    double multiplier = (accuracyPercent * 2 + player.getAccBoost()); //multiplied by 2 so it feels more rewarding to have good accuracy
     damage = wordsPerMinute * multiplier;
     //damage = wordsPerMinute * multiplier + 100;
     enemy.takeDamage(damage);
 
     //prints for testing purposes
+    /*
     prt("typeRacer()");
     prt("total time: " << totalTime.count() << " seconds");
     prt("words written: " << wordsWritten);
@@ -89,6 +107,7 @@ double typeRacer(Enemy& enemy,
     prt("accuracy: " << accuracyPercent * 100 << "%");
     prt("damage: " << damage);
     prt("");
+    */
     return enemy,
     wordsWritten, lettersWritten, wrongLetters,
     damage, accuracyPercent, wordsPerMinute;

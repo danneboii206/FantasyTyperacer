@@ -84,6 +84,12 @@ int finishRoom(Rooms room, Player& player)
     std::vector<std::shared_ptr<item>> roomItems;
     int itemCount = room.getItemCount();
 
+    for (int i = 0; i < itemCount; i++)
+    {
+        roomItems.push_back(room.getItemAtIndex(i));
+    }
+
+
     while (true)
     {
 
@@ -96,10 +102,6 @@ int finishRoom(Rooms room, Player& player)
         else
             std::cout << "\n you may pick any number of these items: \n";
 
-        for (int i = 0; i < itemCount; i++)
-        {
-            roomItems.push_back(room.getItemAtIndex(i));
-        }
 
         for (int i = 0; i < itemCount; i++)
         {
@@ -118,12 +120,11 @@ int finishRoom(Rooms room, Player& player)
         if (input == menuChoices+1)
             return 1;
 
-        item& itemCopy = *room.getItemAtIndex(input-1);
+
         roomItems.erase(roomItems.begin() + input-1);
         itemCount--;
-        player.addItemToInventory(itemCopy);
+        player.addItemToInventory(*roomItems[input-1]);
         player.printItems();
-        std::cout << itemCopy.getName();
 
            /* for (int i = 0; i < menuChoices; i++)
             {
