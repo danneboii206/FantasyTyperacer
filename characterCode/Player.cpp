@@ -165,6 +165,16 @@ std::string Player::potionCheckValidity()
     return "Potion effects cleared: " + potConcat;
 }
 
+void Player::setName(std::string name)
+{
+    this->name = name;
+}
+
+std::string Player::getName() const
+{
+    return this->name;
+}
+
 double Player::getAccBoost() const
 {
     return this->accBoost;

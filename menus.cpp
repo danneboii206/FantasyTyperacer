@@ -21,12 +21,16 @@ void printMainMenu()
     std::cout << std::endl;
     prt("2) exit game");
     std::cout << std::endl;
-    Player player = Player();
+    Player player;
+    std::string name;
     int input = menuInput(2);
     switch (input)
     {
         case 1:
-        roomManager();
+            prt("What's your name?");
+            std::cin >> name;
+            player.setName(name);
+            roomManager(player);
             break;
         case 2:
             exit(0);

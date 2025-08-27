@@ -13,6 +13,7 @@ class Player : public Character
 private:
     const double MAX_HEALTH = 200;
     const int MAX_INVENTORY_SIZE = 10;
+    std::string name;
     double accBoost;
     double wpmBoost;
     int potionsConsumedAmount;
@@ -29,13 +30,15 @@ public:
     std::string unequipItem(int index);
     void consumePotion(int index);
     std::string potionCheckValidity();
+    void setName(std::string name) override;
+    std::string getName() const;
     double getAccBoost() const;
     double getWpmBoost() const;
     int getEquippedArmorIndex() const;
     int getEquippedWeaponIndex() const;
-    void printItems() const;
     item* getItemAtIndex(int index) const;
     int getMAX_INVENTORY_SIZE() const;
+    void printItems() const;
     void printStats() const;
 };
 #endif //PLAYER_H

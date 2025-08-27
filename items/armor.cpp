@@ -10,6 +10,11 @@ armor::~armor()
 {
 }
 
+std::string armor::getType() const
+{
+    return item::getType();
+}
+
 bool armor::getIsEquipped() const
 {
     return this->isEquipped;

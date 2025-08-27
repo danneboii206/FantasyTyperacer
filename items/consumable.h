@@ -29,6 +29,7 @@ public:
     consumable(std::string itemName, std::string description, double wpmBoost,
                double accBoost, double hpBoost, int duration, double instantHeal, std::string type = "consumable");
     ~consumable() override;
+    virtual std::string getType() const override;
     void roundOver();
     int getDuration() const;
     double getInstantHeal() const;

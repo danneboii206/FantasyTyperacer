@@ -11,6 +11,11 @@ consumable::~consumable()
 {
 }
 
+std::string consumable::getType() const
+{
+    return item::getType();
+}
+
 void consumable::roundOver()
 {
     --this->duration;

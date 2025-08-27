@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include <string>
+
 class Character
 {
 private:
@@ -13,7 +15,8 @@ public:
     void takeDamage(double damage);
     void setHealth(double health);
     void setMaxHealth(double health);
-    virtual double getHealth() const;
-    virtual double getMaxHealth() const;
+    double getHealth() const;
+    double getMaxHealth() const;
+    virtual void setName(std::string name) = 0;
 };
 #endif //CHARACTER_H

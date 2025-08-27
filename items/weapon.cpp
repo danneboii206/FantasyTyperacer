@@ -10,6 +10,11 @@ weapon::~weapon()
 {
 }
 
+std::string weapon::getType() const
+{
+    return item::getType();
+}
+
 bool weapon::getIsEquipped() const
 {
     return this->isEquipped;

@@ -4,7 +4,7 @@
 #include "rooms.h"
 #include "menus.h"
 
-void roomManager();
+void roomManager(Player& player);
 void roomPrint(Rooms room);
 int roomInput(Rooms room, Player& player);
 int triggerEvent(Rooms room, Player& player);

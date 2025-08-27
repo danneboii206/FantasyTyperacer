@@ -47,7 +47,7 @@ public:
   virtual ~item();
   std::string getDescription() const;
   std::string getName() const;
-  std::string getType() const;
+  virtual std::string getType() const = 0;
   double getWpmBoost() const;
   double getAccuracyBoost() const;
   double getHpBoost() const;

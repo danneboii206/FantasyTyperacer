@@ -27,6 +27,7 @@ void Enemy::setDamage(double damage)
   this->damage = damage;
 }
 
+
 std::string Enemy::getName()
 {
 	return name;
