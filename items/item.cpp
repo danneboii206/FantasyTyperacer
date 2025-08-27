@@ -1,7 +1,3 @@
-//
-// Created by Daniel Abu Ramadan on 2025-08-25.
-//
-
 #include "item.h"
 
 item::item(std::string itemName, std::string description,

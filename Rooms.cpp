@@ -1,14 +1,20 @@
-//
-// Created by Daniel Abu Ramadan on 2025-01-10.
-//
-
-#include "rooms.h"
-#include <iostream>
 #include <fstream>
 #include <random>
+#include "rooms.h"
+#include "./items/allItems.h"
+#include <memory>
 
 Rooms::Rooms()
+
 {
+    allItems =
+        {
+      std::make_shared<shinyStone>(), std::make_shared<shinyStone>(), std::make_shared<shinyStone>(), std::make_shared<shinyStone>(),
+      std::make_shared<accPotion>(), std::make_shared<accPotion>(), std::make_shared<accPotion>(),
+      std::make_shared<hpPotion>(), std::make_shared<hpPotion>(), std::make_shared<hpPotion>(),
+      std::make_shared<rasmusStick>(), std::make_shared<rasmusStick>(),
+      std::make_shared<bigHpPotion>(), std::make_shared<divineSword>(), std::make_shared<dragonArmor>(), std::make_shared<dungeonMastersSpear>()
+        };
     generateRoom();
     description = descriptionSelector();
 }

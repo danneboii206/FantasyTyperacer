@@ -1,19 +1,16 @@
-//
-// Created by Daniel Abu Ramadan on 2025-01-10.
-//
-
 #include <iostream>
 #include <fstream>
 #include <string>
 #include "menus.h"
-#include "combat.h"
 #include "roomManager.h"
 #include "./characterCode/Player.h"
+#include "items/weapon.h"
+#include "items/armor.h"
+
 #define prt(x) std::cout << x << std::endl
 
-int printMainMenu()
+void printMainMenu()
 {
-    //flavour text
     clearScreen();
     //prints logo
     printFile("../bardic.txt");
@@ -22,25 +19,17 @@ int printMainMenu()
     std::cout << std::endl;
     prt("1) start game");
     std::cout << std::endl;
-    prt("2) reset save");
+    prt("2) exit game");
     std::cout << std::endl;
-    prt("3) exit game");
     Player player = Player();
-    int input = menuInput(3);
+    int input = menuInput(2);
     switch (input)
     {
         case 1:
         roomManager();
             break;
-
         case 2:
-
-            player.resetPlayerData();
-            printMainMenu();
-                break;
-        case 3:
             exit(0);
-            break;
     }
 }
 
@@ -48,19 +37,6 @@ void clearScreen()
 {
     for (int i = 0; i < 80; i++)
         std::cout << std::endl;
-    /*
-    printf(
-        "\033[2J"
-        "\033[1;1H");
-    */
-
-    /*
-#ifdef _WIN32
-    system("cls");
-#else
-    prt("\033[2J\033[1;1H"); // ANSI escape code for clear screen
-#endif
-*/
 }
 
 void printFile(std::string filePath)
@@ -77,11 +53,6 @@ void printFile(std::string filePath)
     }
 }
 
-/// <summary>
-/// takes number of menu choices as argument. returns int of string inputted by user.
-/// </summary>
-/// <param name="menuChoices"></param>
-/// <returns></returns>
 int menuInput(int menuChoices)
 {
     std::string strInput;
@@ -90,7 +61,6 @@ int menuInput(int menuChoices)
 
     while (selecting == true) //iterates through a while loop until input is valid
     {
-        strInput = "";
         input = 0;
         std::cin >> strInput;
 
@@ -118,12 +88,6 @@ int menuInput(int menuChoices)
 
 }
 
-
-/// <summary>
-/// returns false if string argument contains any letters that cannot be converted to int
-/// </summary>
-/// <param name="input"></param>
-/// <returns></returns>
 bool isNumber(const std::string input)
 {
     for (int i = 0; i < input.length(); i++) //iterates through string. returns false if char can't be converted to int.
@@ -145,8 +109,6 @@ void openInventory(Player& player)
 
     while (true)
     {
-
-
         item* itemTest = player.getItemAtIndex(1);
         clearScreen();
 
@@ -180,9 +142,6 @@ void openInventory(Player& player)
         if (input == menuChoices+1)
             return;
 
-        //item& itemCopy = *player.getItemAtIndex(input-1);
-        //std::cout << itemCopy.getName();
-
          for (int i = 0; i < menuChoices; i++)
          {
              std::cout << "\n" << i << "\n";
@@ -200,9 +159,6 @@ void openInventory(Player& player)
 
 void interactWithItem(Player& player, int index)
 {
-
-
-
     clearScreen();
         if (player.getItemAtIndex(index) == nullptr)
         {
@@ -212,15 +168,41 @@ void interactWithItem(Player& player, int index)
 
             return;
         }
-    std::string type = player.getItemAtIndex(index)->getType();
 
-    std::cout << "\n" << player.getItemAtIndex(index)->getName() << "\n";
-    std::cout << "\n" << player.getItemAtIndex(index)->getDescription() << "\n";
+    item* itemAtIndex = player.getItemAtIndex(index);
+    std::string type = itemAtIndex->getType();
+    bool equipped = false;
+
+    if (type == "armor")
+    {
+        armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
+        equipped = armorPtr->getIsEquipped();
+    } else if (type == "weapon")
+    {
+        weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
+        equipped = weaponPtr->getIsEquipped();
+    }
+
+    std::cout << "\n" << itemAtIndex->getName() << "\n";
+    std::cout << "\n" << itemAtIndex->getDescription() << "\n";
     std::cout << "\n" << "type: " << type << "\n";
 
-    std::cout << "\n" << "1: use item" << "\n";
-    std::cout<< "\n" << "2: discard item" << "\n";
-    std::cout << "\n" << "2: leave" << "\n";
+    if (type == "consumable")
+    {
+        std::cout << "\n" << "1: use item" << "\n";
+        std::cout<< "\n" << "2: discard item" << "\n";
+        std::cout << "\n" << "3: leave" << "\n";
+    } else if (type != "consumable" && equipped == false)
+    {
+        std::cout << "\n" << "1: equip item" << "\n";
+        std::cout<< "\n" << "2: discard item" << "\n";
+        std::cout << "\n" << "3: leave" << "\n";
+    } else
+    {
+        std::cout << "\n" << "1: un-equip item" << "\n";
+        std::cout<< "\n" << "2: discard item" << "\n";
+        std::cout << "\n" << "3: leave" << "\n";
+    }
 
     int input = menuInput(3);
 

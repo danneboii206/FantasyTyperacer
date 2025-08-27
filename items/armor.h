@@ -1,7 +1,3 @@
-//
-// Created by Daniel Abu Ramadan on 2025-08-25.
-//
-
 #ifndef ARMOR_H
 #define ARMOR_H
 
@@ -10,11 +6,15 @@
 
 class armor : public item
 {
+private:
+    bool isEquipped;
 public:
     armor() = delete;
     armor(std::string itemName, std::string description, double wpmBoost,
           double accBoost, double hpBoost, std::string type = "armor" );
     ~armor() override;
+    bool getIsEquipped() const;
+    void setIsEquipped(bool isEquipped);
 };
 
 

@@ -1,7 +1,3 @@
-//
-// Created by Daniel Abu Ramadan on 2025-08-26.
-//
-
 #ifndef ALLITEMS_H
 #define ALLITEMS_H
 

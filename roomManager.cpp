@@ -1,12 +1,8 @@
-//
-// Created by rasmu on 2025-08-26.
-//
+#include <iostream>
 #include "roomManager.h"
 #include "./characterCode/skeleton.h"
-#include <iostream>
-
+#include "combat.h"
 #include "characterCode/dragon.h"
-
 
 void roomManager()
 {
@@ -37,18 +33,24 @@ void roomPrint(Rooms room)
 
 int roomInput(Rooms room, Player& player)
 {
+    bool eventTriggered = false;
 
-    int input = menuInput(2);
-    switch (input)
+    while (!eventTriggered)
     {
-        case 1:
-            triggerEvent(room, player);
-        break;
+        roomPrint(room);
+        int input = menuInput(2);
+        switch (input)
+        {
+            case 1:
+                triggerEvent(room, player);
+                eventTriggered = true;
+            break;
 
-        case 2:
-            openInventory(player);
-        break;
+            case 2:
+                openInventory(player);
+            break;
 
+        }
     }
     return 1;
 }
@@ -72,10 +74,8 @@ int triggerEvent(Rooms room, Player& player)
         }
         combat(enemy, player);
 
-        enemy = nullptr;
         delete enemy;
-
-
+        enemy = nullptr;
     }
     finishRoom(room, player);
     std::cout << "test";
@@ -95,7 +95,6 @@ int finishRoom(Rooms room, Player& player)
 
     while (true)
     {
-
         //give loot
         int menuChoices = 0;
         clearScreen();
@@ -129,20 +128,6 @@ int finishRoom(Rooms room, Player& player)
         itemCount--;
 
         player.printItems();
-
-           /* for (int i = 0; i < menuChoices; i++)
-            {
-                std::cout << "\n" << i << "\n";
-                if (i == input + 1)
-                {
-                    item itemCopy = *room.getItemAtIndex(i);
-                    player.addItemToInventory(itemCopy);
-                    std::cout << itemCopy.getName();
-
-                }
-            }*/
-
-
     }
     return 1;
 }

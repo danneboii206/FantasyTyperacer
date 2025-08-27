@@ -5,9 +5,7 @@
 #include "combat.h"
 #include "menus.h"
 #include <filesystem>
-#include "characterCode/goblin.h"
 #include "characterCode/Player.h"
-#include "characterCode/skeleton.h"
 
 #define prt(x) std::cout << x << std::endl
 ///central method for combat which initiates the combat.
@@ -20,15 +18,12 @@ int combat(Enemy* enemy, Player& player)
     double accuracyPercent = 0;
     double wordsPerMinute = 0;
 
-
-
-
     bool inCombat = true;
     while(inCombat == true)
     {
-        printFile(enemy->getArt());
+        printFile(enemy->getArtPath());
         std::cout << enemy->getName() << ": " << enemy->getHealth() << "/" << enemy->getMaxHealth() << " hp" << std::endl;
-        printFile(enemy->getDescription());
+        printFile(enemy->getDescriptionPath());
         prt("Would you like to:");
         prt("1: Attack");
         prt("2: Use item");
@@ -45,19 +40,6 @@ int combat(Enemy* enemy, Player& player)
             inCombat = false;
 
         player.takeDamage(enemy->getDamage());
-        //player.savePlayerData();
-        //prints for testing purposes
-        /*
-        prt("Combat()");
-        prt("words written: " << wordsWritten);
-        prt("wpm: " << wordsPerMinute);
-        prt("letters written: " << lettersWritten);
-        prt("wrong letters: " << wrongLetters);
-        //prevents divide by zero
-        prt("accuracy: " << accuracyPercent * 100 << "%");
-        prt("damage: " << damage);
-        prt("");
-        */
     }
 
     player.potionCheckValidity();
@@ -93,22 +75,8 @@ double typeRacer(Enemy& enemy,
     wordsPerMinute = wordsWritten / (totalTime.count() / 60 ) + player.getWpmBoost();
     double multiplier = (accuracyPercent * 2 + player.getAccBoost()); //multiplied by 2 so it feels more rewarding to have good accuracy
     damage = wordsPerMinute * multiplier;
-    //damage = wordsPerMinute * multiplier + 100;
     enemy.takeDamage(damage);
 
-    //prints for testing purposes
-    /*
-    prt("typeRacer()");
-    prt("total time: " << totalTime.count() << " seconds");
-    prt("words written: " << wordsWritten);
-    prt("wpm: " << wordsPerMinute);
-    prt("letters written: " << lettersWritten);
-    prt("wrong letters: " << wrongLetters);
-    //prevents divide by zero
-    prt("accuracy: " << accuracyPercent * 100 << "%");
-    prt("damage: " << damage);
-    prt("");
-    */
     return enemy,
     wordsWritten, lettersWritten, wrongLetters,
     damage, accuracyPercent, wordsPerMinute;
@@ -204,9 +172,9 @@ void printOptions(Player & player)
 void printBattle(Enemy enemy, std::string line, Player& player)
 {
     clearScreen();
-    printFile(enemy.getArt());
+    printFile(enemy.getArtPath());
     std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
-    printFile(enemy.getDescription());
+    printFile(enemy.getDescriptionPath());
     prt("player hp: " << player.getHealth());
     prt("type the following line to attack:");
     prt(line);
