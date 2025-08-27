@@ -10,7 +10,7 @@
 #include "menus.h"
 void roomManager();
 void roomPrint(Rooms room);
-int roomInput(Rooms room);
-int triggerEvent(Rooms room);
-int finishRoom(Rooms room);
+int roomInput(Rooms room, Player& player);
+int triggerEvent(Rooms room, Player& player);
+int finishRoom(Rooms room, Player& player);
 #endif //ROOMMANAGER_H

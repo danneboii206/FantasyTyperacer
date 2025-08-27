@@ -10,7 +10,7 @@
 
 void roomManager()
 {
-
+    Player player = Player();
     int roomCount = 10; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
@@ -18,9 +18,9 @@ void roomManager()
         std::cout << "room number: " << i << std::endl;
         Rooms room = Rooms();
         roomPrint(room);
-        roomInput(room);
+        roomInput(room, player);
     }
-    combat(new Dragon());
+    combat(new Dragon(), player);
 }
 
 
@@ -31,14 +31,14 @@ void roomPrint(Rooms room)
     std::cout<< "\n" << "2: Use item" << "\n";
 }
 
-int roomInput(Rooms room)
+int roomInput(Rooms room, Player& player)
 {
 
     int input = menuInput(2);
     switch (input)
     {
         case 1:
-            triggerEvent(room);
+            triggerEvent(room, player);
         break;
 
         case 2:
@@ -49,7 +49,7 @@ int roomInput(Rooms room)
     return 1;
 }
 
-int triggerEvent(Rooms room)
+int triggerEvent(Rooms room, Player& player)
 {
     if (room.getHasEnemy() == true)
     {
@@ -66,18 +66,18 @@ int triggerEvent(Rooms room)
                 enemy = new Skeleton();
 
         }
-        combat(enemy);
+        combat(enemy, player);
 
         enemy = nullptr;
         delete enemy;
-        finishRoom(room);
+        finishRoom(room, player);
 
     }
     std::cout << "test";
     return 1;
 }
 
-int finishRoom(Rooms room)
+int finishRoom(Rooms room, Player& player)
 {
     //give loot
     return 1;
