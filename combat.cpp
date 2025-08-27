@@ -60,6 +60,7 @@ int combat(Enemy* enemy, Player& player)
         */
     }
 
+    player.potionCheckValidity();
     return 1;
 }
 

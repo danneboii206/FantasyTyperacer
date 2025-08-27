@@ -10,17 +10,20 @@
 
 void roomManager()
 {
+
     Player player = Player();
-    int roomCount = 10; //amount of rooms to explore before the boss is encountered
+    int roomCount = 2; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
         std::cout << "room number: " << i << std::endl;
         Rooms room = Rooms();
         roomPrint(room);
+
         roomInput(room, player);
     }
     combat(new Dragon(), player);
+    printFile("../Art/winText.txt");
 }
 
 
@@ -121,9 +124,10 @@ int finishRoom(Rooms room, Player& player)
             return 1;
 
 
+        player.addItemToInventory(*roomItems[input-1]);
         roomItems.erase(roomItems.begin() + input-1);
         itemCount--;
-        player.addItemToInventory(*roomItems[input-1]);
+
         player.printItems();
 
            /* for (int i = 0; i < menuChoices; i++)
