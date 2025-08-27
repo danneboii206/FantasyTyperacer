@@ -6,9 +6,9 @@
 
 Player::Player()
     : accBoost(0), wpmBoost(0), potionsConsumedAmount(0),
-      equippedArmorIndex(-1), equippedWeaponIndex(-1)
+      equippedArmorIndex(-1), equippedWeaponIndex(-1), Character(200)
 {
-    loadPlayerData();
+    //loadPlayerData();
 }
 
 Player::~Player()

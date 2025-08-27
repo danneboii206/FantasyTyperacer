@@ -11,7 +11,7 @@
 
 #define prt(x) std::cout << x << std::endl
 ///central method for combat which initiates the combat.
-int combat(Enemy* enemy)
+int combat(Enemy* enemy, Player& player)
 {
     int wordsWritten = 0;
     int lettersWritten = 0;
@@ -20,19 +20,19 @@ int combat(Enemy* enemy)
     double accuracyPercent = 0;
     double wordsPerMinute = 0;
 
-    Player* player = new Player();
+
 
 
     bool inCombat = true;
     while(inCombat == true)
     {
-        typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute, *player);
+        typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute, player);
 
         if (enemy->getHealth() <= 0)
             inCombat = false;
 
-        player->takeDamage(enemy->getDamage());
-        player->savePlayerData();
+        player.takeDamage(enemy->getDamage());
+        //player.savePlayerData();
         //prints for testing purposes
         prt("Combat()");
         prt("words written: " << wordsWritten);
