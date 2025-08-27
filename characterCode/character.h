@@ -1,9 +1,6 @@
-//
-// Created by rasmu on 2025-02-10.
-//
-
 #ifndef CHARACTER_H
 #define CHARACTER_H
+
 class Character
 {
 private:

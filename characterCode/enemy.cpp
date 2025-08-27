@@ -1,13 +1,8 @@
-//
-// Created by rasmu on 2025-02-21.
-//
-
 #include "Enemy.h"
 #include <iostream>
 
-
 Enemy::Enemy(double damage, double maxHealth)
-  :damage(damage), Character(maxHealth)
+  : damage(damage), Character(maxHealth)
 {
 }
 Enemy::Enemy(): damage(10)
@@ -22,13 +17,13 @@ void Enemy::setName(std::string name)
 {
   this->name = name;
 }
-void Enemy::setDescription(std::string description)
+void Enemy::setDescriptionPath(std::string descriptionPath)
 {
-	this->description = description;
+	this->descriptionPath = descriptionPath;
 }
-void Enemy::setArt(std::string art)
+void Enemy::setArtPath(std::string artPath)
 {
-	this->art = art;
+	this->artPath = artPath;
 }
 void Enemy::setDamage(double damage)
 {
@@ -39,16 +34,16 @@ std::string Enemy::getName()
 {
 	return name;
 }
-std::string Enemy::getDescription()
+std::string Enemy::getDescriptionPath()
 {
-  return description;
+  return descriptionPath;
 }
-std::string Enemy::getArt()
+std::string Enemy::getArtPath()
 {
-  return art;
+  return artPath;
 }
 
-int Enemy::getDamage() const
+double Enemy::getDamage() const
 {
   return damage;
 }

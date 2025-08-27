@@ -1,12 +1,7 @@
-//
-// Created by rasmu on 2025-02-22.
-//
-
 #ifndef GOBLIN_H
 #define GOBLIN_H
-#include "enemy.h"
-#include <string>
 
+#include "enemy.h"
 
 class Goblin : public Enemy
 {

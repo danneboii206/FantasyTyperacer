@@ -1,9 +1,4 @@
-//
-// Created by rasmu on 2025-02-10.
-//
-
 #include "character.h"
-
 
 Character::Character(const double maxHealth):maxHealth(maxHealth)
 {

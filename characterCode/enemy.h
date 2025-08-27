@@ -1,7 +1,3 @@
-//
-// Created by rasmu on 2025-02-21.
-//
-
 #ifndef ENEMY_H
 #define ENEMY_H
 
@@ -13,22 +9,21 @@ class Enemy : public Character
 {
 private:
     std::string name;
-    std::string description;
-    std::string art; //filepath to txt file
+    std::string descriptionPath;
+    std::string artPath; //filepath to txt file
     double damage;
-
 public:
     Enemy(double damage, double maxHealth);
     Enemy();
     virtual ~Enemy();
     void setName(std::string name);
-    void setDescription(std::string description);
-    void setArt(std::string art);
+    void setDescriptionPath(std::string descriptionPath);
+    void setArtPath(std::string artPath);
     void setDamage(double damage);
     std::string getName();
-    std::string getDescription();
-    std::string getArt();
-    int getDamage() const;
+    std::string getDescriptionPath();
+    std::string getArtPath();
+    double getDamage() const;
 };
 
 #endif //ENEMY_H
