@@ -1,11 +1,8 @@
 #include "Enemy.h"
 #include <iostream>
 
-Enemy::Enemy(double damage, double maxHealth)
-  : damage(damage), Character(maxHealth)
-{
-}
-Enemy::Enemy(): damage(10)
+Enemy::Enemy(double damage, double maxHealth, std::string name)
+  : damage(damage), Character(maxHealth), name(name)
 {
 }
 

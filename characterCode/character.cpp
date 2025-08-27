@@ -1,12 +1,8 @@
 #include "character.h"
 
-Character::Character(const double maxHealth):maxHealth(maxHealth)
+Character::Character(const double maxHealth)
+    : health(maxHealth), maxHealth(maxHealth)
 {
-    health = maxHealth;
-}
-Character::Character():maxHealth(40)
-{
-    health = maxHealth;
 }
 
 Character::~Character()

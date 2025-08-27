@@ -5,7 +5,7 @@
 
 class Goblin : public Enemy
 {
-    public:
+public:
     Goblin();
     ~Goblin() override;
 };

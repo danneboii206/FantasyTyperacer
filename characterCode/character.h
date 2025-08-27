@@ -6,10 +6,9 @@ class Character
 private:
     double health;
     double maxHealth;
-
 public:
     Character(double maxHealth);
-    Character();
+    Character() = delete;
     virtual ~Character();
     void takeDamage(double damage);
     void setHealth(double health);

@@ -1,13 +1,10 @@
 #include "goblin.h"
 
 Goblin::Goblin()
+    : Enemy(10, 100, "Goblin")
 {
-    setName("Goblin");
     setDescriptionPath("../descriptions/enemyDescriptions/goblinDescription.txt");
     setArtPath("../art/enemyPortraits/goblin.txt");
-    setDamage(10);
-    setMaxHealth(100);
-    setHealth(100);
 }
 
 Goblin::~Goblin()

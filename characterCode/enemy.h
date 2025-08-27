@@ -13,8 +13,8 @@ private:
     std::string artPath; //filepath to txt file
     double damage;
 public:
-    Enemy(double damage, double maxHealth);
-    Enemy();
+    Enemy(double damage, double maxHealth, std::string name);
+    Enemy() = delete;
     virtual ~Enemy();
     void setName(std::string name);
     void setDescriptionPath(std::string descriptionPath);

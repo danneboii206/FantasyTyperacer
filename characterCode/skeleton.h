@@ -2,8 +2,9 @@
 #define SKELETON_H
 #include "enemy.h"
 
-class Skeleton : public Enemy {
-    public:
+class Skeleton : public Enemy
+{
+public:
     Skeleton();
     ~Skeleton() override;
 };
