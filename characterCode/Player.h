@@ -16,7 +16,6 @@ private:
     std::string name;
     double accBoost;
     double wpmBoost;
-    int potionsConsumedAmount;
     int equippedArmorIndex;
     int equippedWeaponIndex;
     std::vector<std::unique_ptr<item>> inventory;

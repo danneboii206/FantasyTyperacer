@@ -6,6 +6,7 @@
 #include "./characterCode/Player.h"
 #include "items/weapon.h"
 #include "items/armor.h"
+#include <sanitizer/lsan_interface.h>
 
 #define prt(x) std::cout << x << std::endl
 
@@ -33,6 +34,7 @@ void printMainMenu()
             roomManager(player);
             break;
         case 2:
+            __lsan_do_leak_check();
             exit(0);
     }
 }

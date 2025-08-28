@@ -4,7 +4,7 @@
 #include "../items/weapon.h"
 
 Player::Player()
-    : Character(200), accBoost(0), wpmBoost(0), potionsConsumedAmount(0),
+    : Character(200), accBoost(0), wpmBoost(0),
       equippedArmorIndex(-1), equippedWeaponIndex(-1)
 {
 }
@@ -140,14 +140,13 @@ void Player::consumePotion(int index)
         this->setMaxHealth(this->getMaxHealth() + potPtr->getHpBoost());
     }
     this->removeItemFromInventory(index);
-
-    ++this->potionsConsumedAmount;
 }
 
 std::string Player::potionCheckValidity()
 {
-    std::string potConcat;
-    for (int i = 0; i < potionsConsumedAmount; i++)
+    std::string potConcatExpired;
+    std::string potConcatValid;
+    for (int i = 0; i < consumedPotionsList.size(); i++)
     {
         if (this->consumedPotionsList[i]->getDuration() == 0)
         {
@@ -155,14 +154,17 @@ std::string Player::potionCheckValidity()
             this->setMaxHealth(this->getMaxHealth() - this->consumedPotionsList[i]->getHpBoost());
             this->accBoost -= this->consumedPotionsList[i]->getAccuracyBoost();
 
-            potConcat += this->consumedPotionsList[i]->getName();
+            consumedPotionsList.erase(consumedPotionsList.begin() + i);
+
+            potConcatExpired += this->consumedPotionsList[i]->getName();
         } else
         {
             this->consumedPotionsList[i]->roundOver();
-            return potConcat;
+
+            potConcatExpired += this->consumedPotionsList[i]->getName();
         }
     }
-    return "Potion effects cleared: " + potConcat;
+    return "Potions still in effect: " + potConcatValid + "Potions effects cleared: " + potConcatExpired;
 }
 
 void Player::setName(std::string name)
