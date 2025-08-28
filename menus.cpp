@@ -220,7 +220,7 @@ void interactWithItem(Player& player, int index)
     {
         if (type == "consumable")
             player.consumePotion(index);
-        else if ((type == "weapon" || type == "armor") && equipped == false )
+        else if (type != "consumable" && equipped == false )
             player.equipItem(index);
         else
             player.unequipItem(index);
