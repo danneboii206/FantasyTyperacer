@@ -36,8 +36,6 @@ void roomManager(Player& player)
 
     delete dragon;
     dragon = nullptr;
-
-    return;
 }
 
 
