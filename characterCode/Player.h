@@ -39,6 +39,12 @@ public:
     item* getItemAtIndex(int index) const;
     int getMAX_INVENTORY_SIZE() const;
     void printItems() const;
+
+    item* getItemAtIndex(int index) const;
+    int getMAX_INVENTORY_SIZE();
+
+    //FOR TESTING, REMOVE B4 INLÄMNING
+
     void printStats() const;
 };
 #endif //PLAYER_H

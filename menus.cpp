@@ -20,6 +20,7 @@ void printMainMenu()
     prt("1) start game");
     std::cout << std::endl;
     prt("2) exit game");
+
     std::cout << std::endl;
     Player player;
     std::string name;
@@ -33,6 +34,7 @@ void printMainMenu()
             roomManager(player);
             break;
         case 2:
+
             exit(0);
     }
 }
@@ -113,6 +115,7 @@ void openInventory(Player& player)
 
     while (true)
     {
+
         item* itemTest = player.getItemAtIndex(1);
         clearScreen();
 
@@ -146,6 +149,10 @@ void openInventory(Player& player)
         if (input == menuChoices+1)
             return;
 
+
+        //item& itemCopy = *player.getItemAtIndex(input-1);
+        //std::cout << itemCopy.getName();
+
          for (int i = 0; i < menuChoices; i++)
          {
              std::cout << "\n" << i << "\n";
@@ -157,7 +164,48 @@ void openInventory(Player& player)
          }
 
 
+
     }
+
+}
+
+void interactWithItem(Player& player, int index)
+{
+
+
+
+    clearScreen();
+        if (player.getItemAtIndex(index) == nullptr)
+        {
+            std::cout << "\n there is no item. \n";
+            std::cout << "press enter to return\n";
+            menuInput(1);
+
+            return;
+        }
+    std::string type = player.getItemAtIndex(index)->getType();
+
+    std::cout << "\n" << player.getItemAtIndex(index)->getName() << "\n";
+    std::cout << "\n" << player.getItemAtIndex(index)->getDescription() << "\n";
+    std::cout << "\n" << "type: " << type << "\n";
+
+    std::cout << "\n" << "1: use item" << "\n";
+    std::cout<< "\n" << "2: discard item" << "\n";
+    std::cout << "\n" << "2: leave" << "\n";
+
+    int input = menuInput(3);
+
+    if (input == 1)
+    {
+        if (type == "consumable")
+            player.consumePotion(index);
+        else
+            player.equipItem(index);
+    }
+    else if (input == 2)
+        player.removeItemFromInventory(index);
+    else
+        return;
 
 }
 
