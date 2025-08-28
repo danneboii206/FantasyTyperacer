@@ -6,7 +6,7 @@
 
 void roomManager(Player& player)
 {
-    int roomCount = 5; //amount of rooms to explore before the boss is encountered
+    int roomCount = 1; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
@@ -16,7 +16,12 @@ void roomManager(Player& player)
 
         roomInput(room, player);
     }
-    combat(new Dragon(), player);
+    if (combat(new Dragon(), player) == 0)
+    {
+        std::cout << "you died! press 1 to return to main menu.";
+        menuInput(1);
+        printMainMenu();
+    }
     printFile("../Art/winText.txt");
     std::cout << "\n 1: return to main menu \n";
     menuInput(1);
@@ -73,7 +78,12 @@ int triggerEvent(Rooms room, Player& player)
                 enemy = new Skeleton();
 
         }
-        combat(enemy, player);
+        if (combat(enemy, player) == 0)
+        {
+            std::cout << "you died! press 1 to return to main menu.";
+            menuInput(1);
+            printMainMenu();
+        }
 
         delete enemy;
         enemy = nullptr;
