@@ -6,7 +6,7 @@
 
 void roomManager(Player& player)
 {
-    int roomCount = 2; //amount of rooms to explore before the boss is encountered
+    int roomCount = 5; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
@@ -18,6 +18,9 @@ void roomManager(Player& player)
     }
     combat(new Dragon(), player);
     printFile("../Art/winText.txt");
+    std::cout << "\n 1: return to main menu \n";
+    menuInput(1);
+    printMainMenu();
 }
 
 
