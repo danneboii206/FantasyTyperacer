@@ -6,11 +6,7 @@
 
 void roomManager(Player& player)
 {
-
-
-    Player player = Player();
-    int roomCount = 5; //amount of rooms to explore before the boss is encountered
-
+    int roomCount = 2; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
@@ -22,12 +18,6 @@ void roomManager(Player& player)
     }
     combat(new Dragon(), player);
     printFile("../Art/winText.txt");
-
-    std::cout << "\n you defeated the evil dragon and earned his treasures! \n";
-    std::cout << "\n 1: return to main menu. \n";
-    menuInput(1);
-    printMainMenu();
-
 }
 
 
@@ -96,14 +86,6 @@ int finishRoom(Rooms room, Player& player)
     int itemCount = room.getItemCount();
 
     for (int i = 0; i < itemCount; i++)
-
-    {
-        roomItems.push_back(room.getItemAtIndex(i));
-    }
-
-
-    while (true)
-
     {
         roomItems.push_back(room.getItemAtIndex(i));
     }
@@ -142,23 +124,6 @@ int finishRoom(Rooms room, Player& player)
         player.addItemToInventory(*roomItems[input-1]);
         roomItems.erase(roomItems.begin() + input-1);
         itemCount--;
-
-
-        player.printItems();
-
-           /* for (int i = 0; i < menuChoices; i++)
-            {
-                std::cout << "\n" << i << "\n";
-                if (i == input + 1)
-                {
-                    item itemCopy = *room.getItemAtIndex(i);
-                    player.addItemToInventory(itemCopy);
-                    std::cout << itemCopy.getName();
-
-                }
-            }*/
-
-
 
         player.printItems();
     }
