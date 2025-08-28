@@ -6,7 +6,7 @@
 
 void roomManager(Player& player)
 {
-    int roomCount = 4; //amount of rooms to explore before the boss is encountered
+    const int roomCount = 4; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
