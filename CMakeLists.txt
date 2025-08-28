@@ -3,8 +3,9 @@ project(FantasyTyperacer)
 
 set(CMAKE_CXX_STANDARD 20)
 
-
-
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG "")
 
 add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         characterCode/character.cpp

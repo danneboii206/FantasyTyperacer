@@ -4,8 +4,7 @@
 #include "../items/weapon.h"
 
 Player::Player()
-    : Character(200), accBoost(0), wpmBoost(0),
-      equippedArmorIndex(-1), equippedWeaponIndex(-1)
+    : Character(200), accBoost(0), wpmBoost(0)
 {
 }
 
@@ -47,6 +46,8 @@ std::string Player::removeItemFromInventory(int index)
 {
     std::string itemName = inventory[index]->getName();
 
+
+
     inventory.erase(inventory.begin() + index);
 
     return "Dropped item: " + itemName + ".";
@@ -58,13 +59,13 @@ std::string Player::equipItem(int index)
     std::string type = itemAtIndex->getType();
 
     //first, check if there's nothing equipped in its place
-    if (type == "armor" && equippedArmorIndex != -1)
+    if (type == "armor" && this->getEquippedArmorIndex() != -1)
     {
-        return "Please un-equip the armor: " + this->inventory[equippedArmorIndex]->getName() + ".";
+        return "Please un-equip the armor: " + this->inventory[this->getEquippedArmorIndex()]->getName() + ".";
     }
-    else if (type == "weapon" && equippedWeaponIndex != -1)
+    else if (type == "weapon" && this->getEquippedWeaponIndex() != -1)
     {
-        return "Please un-equip the weapon: " + this->inventory[equippedWeaponIndex]->getName() + ".";
+        return "Please un-equip the weapon: " + this->inventory[this->getEquippedWeaponIndex()]->getName() + ".";
     }
 
     //then add the stats from the item to the players stats.
@@ -74,12 +75,10 @@ std::string Player::equipItem(int index)
     if (type == "armor")
     {
         armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
-        this->equippedArmorIndex = index;
         armorPtr->setIsEquipped(true);
     } else
     {
         weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
-        this->equippedWeaponIndex = index;
         weaponPtr->setIsEquipped(true);
     }
     return "Equipped " + itemAtIndex->getName() + ".";
@@ -102,14 +101,12 @@ std::string Player::unequipItem(int index)
     if (type == "armor")
     {
         armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
-        equippedArmorIndex = -1;
         armorPtr->setIsEquipped(false);
     }
     else if (type == "weapon")
     {
         weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
-        equippedWeaponIndex = -1;
-        weaponPtr->setIsEquipped(true);
+        weaponPtr->setIsEquipped(false);
     }
     return "Un-equipped " + itemAtIndex->getName() + ".";
 
@@ -189,12 +186,42 @@ double Player::getWpmBoost() const
 
 int Player::getEquippedArmorIndex() const
 {
-    return this->equippedArmorIndex;
+    for (int i = 0; i < this->inventory.size(); i++)
+    {
+        bool equipped = false;
+
+        armor* armorPtr = dynamic_cast<armor*>(this->inventory[i].get());
+        if (armorPtr != nullptr)
+        {
+            equipped = armorPtr->getIsEquipped();
+
+            if (equipped == true)
+            {
+                return i;
+            }
+        }
+    }
+    return -1;
 }
 
 int Player::getEquippedWeaponIndex() const
 {
-    return this->equippedWeaponIndex;
+    for (int i = 0; i < this->inventory.size(); i++)
+    {
+        bool equipped = false;
+
+        weapon* weaponPtr = dynamic_cast<weapon*>(this->inventory[i].get());
+        if (weaponPtr != nullptr)
+        {
+            equipped = weaponPtr->getIsEquipped();
+
+            if (equipped == true)
+            {
+                return i;
+            }
+        }
+    }
+    return -1;
 }
 
 void Player::printItems() const

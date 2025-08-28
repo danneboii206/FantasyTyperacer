@@ -11,13 +11,10 @@
 class Player : public Character
 {
 private:
-    const double MAX_HEALTH = 200;
     const int MAX_INVENTORY_SIZE = 10;
     std::string name;
     double accBoost;
     double wpmBoost;
-    int equippedArmorIndex;
-    int equippedWeaponIndex;
     std::vector<std::unique_ptr<item>> inventory;
     std::vector<std::unique_ptr<consumable>> consumedPotionsList;
 public:

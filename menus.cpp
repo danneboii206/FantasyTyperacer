@@ -7,9 +7,9 @@
 #include "items/weapon.h"
 #include "items/armor.h"
 //#include <sanitizer/lsan_interface.h>
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
 #define prt(x) std::cout << x << std::endl
 
@@ -38,7 +38,7 @@ void printMainMenu()
             break;
         case 2:
             //__lsan_do_leak_check();
-            _CrtDumpMemoryLeaks();
+            //_CrtDumpMemoryLeaks();
             exit(0);
     }
 }
@@ -220,8 +220,10 @@ void interactWithItem(Player& player, int index)
     {
         if (type == "consumable")
             player.consumePotion(index);
-        else
+        else if ((type == "weapon" || type == "armor") && equipped == false )
             player.equipItem(index);
+        else
+            player.unequipItem(index);
     }
     else if (input == 2)
         player.removeItemFromInventory(index);
