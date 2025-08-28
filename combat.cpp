@@ -174,7 +174,7 @@ void printBattle(Enemy enemy, std::string line, Player& player)
     clearScreen();
     printFile(enemy.getArtPath());
     std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
-    printFile(enemy.getDescriptionPath());
+    //printFile(enemy.getDescriptionPath());
     prt("player hp: " << player.getHealth());
     prt("type the following line to attack:");
     prt(line);
