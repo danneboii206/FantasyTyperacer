@@ -1,14 +1,20 @@
-//
-// Created by Daniel Abu Ramadan on 2025-01-10.
-//
-
-#include "rooms.h"
-#include <iostream>
 #include <fstream>
 #include <random>
+#include "rooms.h"
+#include "./items/allItems.h"
+#include <memory>
 
 Rooms::Rooms()
+
 {
+    allItems =
+        {
+      std::make_shared<shinyStone>(), std::make_shared<shinyStone>(), std::make_shared<shinyStone>(), std::make_shared<shinyStone>(),
+      std::make_shared<accPotion>(), std::make_shared<accPotion>(), std::make_shared<accPotion>(),
+      std::make_shared<hpPotion>(), std::make_shared<hpPotion>(), std::make_shared<hpPotion>(),
+      std::make_shared<rasmusStick>(), std::make_shared<rasmusStick>(),
+      std::make_shared<bigHpPotion>(), std::make_shared<divineSword>(), std::make_shared<dragonArmor>(), std::make_shared<dungeonMastersSpear>()
+        };
     generateRoom();
     description = descriptionSelector();
 }
@@ -24,12 +30,12 @@ item** Rooms::getItems()
 }
 */
 
-bool Rooms::getHasEnemy()
+bool Rooms::getHasEnemy() const
 {
     return hasEnemy;
 }
 
-std::string Rooms::getDescription()
+std::string Rooms::getDescription() const
 {
     return description;
 }
@@ -101,12 +107,12 @@ std::string Rooms::descriptionSelector()
     return selectedFile;
 }
 
-int Rooms::getItemCount()
+int Rooms::getItemCount() const
 {
     return itemCount;
 }
 
-std::shared_ptr<item> Rooms::getItemAtIndex(int index)
+std::shared_ptr<item> Rooms::getItemAtIndex(int index) const
 {
     if (index >= itemCount)
         return nullptr;

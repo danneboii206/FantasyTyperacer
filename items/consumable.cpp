@@ -1,7 +1,3 @@
-//
-// Created by Daniel Abu Ramadan on 2025-08-25.
-//
-
 #include "consumable.h"
 
 consumable::consumable(std::string itemName, std::string description, double wpmBoost, double accBoost,
@@ -13,6 +9,11 @@ consumable::consumable(std::string itemName, std::string description, double wpm
 
 consumable::~consumable()
 {
+}
+
+std::string consumable::getType() const
+{
+    return item::getType();
 }
 
 void consumable::roundOver()

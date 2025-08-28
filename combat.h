@@ -1,7 +1,3 @@
-//
-// Created by Daniel Abu Ramadan on 2025-01-10.
-//
-
 #ifndef COMBAT_H
 #define COMBAT_H
 

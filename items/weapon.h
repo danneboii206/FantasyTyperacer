@@ -1,7 +1,3 @@
-//
-// Created by Daniel Abu Ramadan on 2025-08-25.
-//
-
 #ifndef WEAPON_H
 #define WEAPON_H
 
@@ -10,11 +6,16 @@
 
 class weapon : public item
 {
+private:
+    bool isEquipped;
 public:
     weapon() = delete;
     weapon(std::string itemName, std::string description,
         double wpmBoost, double accBoost, double hpBoost, std::string type = "weapon");
     ~weapon() override;
+    virtual std::string getType() const override;
+    bool getIsEquipped() const;
+    void setIsEquipped(bool isEquipped);
 };
 
 

@@ -1,82 +1,43 @@
-//
-// Created by rasmu on 2025-08-24.
-//
 #include "Player.h"
 #include <iostream>
+#include "../items/armor.h"
+#include "../items/weapon.h"
 
 Player::Player()
-    : accBoost(0), wpmBoost(0), potionsConsumedAmount(0),
-      equippedArmorIndex(-1), equippedWeaponIndex(-1), Character(200)
+    : Character(200), accBoost(0), wpmBoost(0), potionsConsumedAmount(0),
+      equippedArmorIndex(-1), equippedWeaponIndex(-1)
 {
-    //loadPlayerData();
 }
 
 Player::~Player()
 {
-    std::cout<<"destroying player"; //for testing purposes
-}
-
-void Player::savePlayerData()
-{
-    //obsolete
-    std::string maxHp = std::to_string(this->getMaxHealth());
-    std::string Hp = std::to_string(this->getHealth());
-
-    std::ofstream saveFile(this->filepath + "/PlayerData.txt");
-    saveFile << maxHp << std::endl;
-    saveFile << Hp << std::endl;
-
-    saveFile.close();
-}
-
-void Player::loadPlayerData()
-{
-    //obsolete
-    std::ifstream saveFile(this->filepath + "/PlayerData.txt");
-    std::string line;
-
-    int i = 0;
-    while (std::getline(saveFile, line))
-    {
-        i++;
-        switch (i)
-        {
-            case 1:
-                setMaxHealth(std::stoi(line));
-                break;
-            case 2:
-                setHealth(std::stoi(line));
-        }
-    }
-
-}
-
-void Player::resetPlayerData()
-{
-    //obsolete
-    std::ofstream saveFile(this->filepath + "/PlayerData.txt");
-    saveFile << 200 << std::endl;
-    saveFile << 200 << std::endl;
-
-    saveFile.close();
 }
 
 std::string Player::addItemToInventory(item& Item)
 {
+    std::string type = Item.getType();
+
     //first check if there is space
     if (this->inventory.size() == MAX_INVENTORY_SIZE)
     {
         return "Space is full! Consider dropping an item";
     }
 
-    if (Item.getType() == "consumable")
+    if (type == "consumable")
     {   //due to consumable being the only one with extra data (duration), everything else is just an item basically.
         consumable* potionPtr = dynamic_cast<consumable*>(&Item);
 
         inventory.push_back(std::make_unique<consumable>(*potionPtr));
+    } else if (type == "weapon")
+    {
+        weapon* weaponPtr = dynamic_cast<weapon*>(&Item);
+
+        inventory.push_back(std::make_unique<weapon>(*weaponPtr));
     } else
     {
-        inventory.push_back(std::make_unique<item>(Item));
+        armor* armorPtr = dynamic_cast<armor*>(&Item);
+
+        inventory.push_back(std::make_unique<armor>(*armorPtr));
     }
 
     return "Picked up item: " + this->inventory[this->inventory.size() - 1]->getName() + ".";
@@ -93,62 +54,67 @@ std::string Player::removeItemFromInventory(int index)
 
 std::string Player::equipItem(int index)
 {
-    std::string type = this->inventory[index]->getType();
+    item* itemAtIndex = this->getItemAtIndex(index);
+    std::string type = itemAtIndex->getType();
 
     //first, check if there's nothing equipped in its place
     if (type == "armor" && equippedArmorIndex != -1)
     {
-        return "Please unequip the armor: " + this->inventory[equippedArmorIndex]->getName() + ".";
+        return "Please un-equip the armor: " + this->inventory[equippedArmorIndex]->getName() + ".";
     }
     else if (type == "weapon" && equippedWeaponIndex != -1)
     {
-        return "Please unequip the weapon: " + this->inventory[equippedWeaponIndex]->getName() + ".";
+        return "Please un-equip the weapon: " + this->inventory[equippedWeaponIndex]->getName() + ".";
     }
 
     //then add the stats from the item to the players stats.
-    this->accBoost += this->inventory[index]->getAccuracyBoost();
-    this->setMaxHealth(this->getMaxHealth() + this->inventory[index]->getHpBoost());
-    this->wpmBoost += this->inventory[index]->getWpmBoost();
+    this->accBoost += itemAtIndex->getAccuracyBoost();
+    this->setMaxHealth(this->getMaxHealth() + itemAtIndex->getHpBoost());
+    this->wpmBoost += itemAtIndex->getWpmBoost();
     if (type == "armor")
     {
+        armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
         this->equippedArmorIndex = index;
+        armorPtr->setIsEquipped(true);
     } else
     {
+        weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
         this->equippedWeaponIndex = index;
+        weaponPtr->setIsEquipped(true);
     }
-    return "Equipped " + this->inventory[index]->getName() + ".";
+    return "Equipped " + itemAtIndex->getName() + ".";
 }
 
 
 std::string Player::unequipItem(int index)
 {
+    item* itemAtIndex = this->getItemAtIndex(index);
     std::string type = this->inventory[index]->getType();
 
-    this->accBoost -= this->inventory[index]->getAccuracyBoost();
-    this->setMaxHealth(this->getMaxHealth() - this->inventory[index]->getHpBoost());
+    this->accBoost -= itemAtIndex->getAccuracyBoost();
+    this->setMaxHealth(this->getMaxHealth() - itemAtIndex->getHpBoost());
     if (this->getHealth() > this->getMaxHealth()) //incase the item made your max-hp lower
     {
         this->setHealth(this->getMaxHealth());
     }
-    this->wpmBoost -= this->inventory[index]->getWpmBoost();
+    this->wpmBoost -= itemAtIndex->getWpmBoost();
 
     if (type == "armor")
     {
+        armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
         equippedArmorIndex = -1;
+        armorPtr->setIsEquipped(false);
     }
     else if (type == "weapon")
     {
+        weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
         equippedWeaponIndex = -1;
+        weaponPtr->setIsEquipped(true);
     }
-    return "Un-equipped " + inventory[index]->getName() + ".";
+    return "Un-equipped " + itemAtIndex->getName() + ".";
 
 }
 
-//For potion effect to wear off, there should always be a check on what the duration is.
-//If duration is 0, then removePotionEffect should be called, so implement that in the game loop or something.
-//Alright Rasmus?
-//FYI: void roundOver(); is a function inside ../items/consumables.h, you can call that with the help of a loop
-//checking if consumedPotionsList[i] != nullptr :)
 void Player::consumePotion(int index)
 {
     consumable* potPtr = dynamic_cast<consumable*>(this->inventory[index].get());
@@ -199,6 +165,16 @@ std::string Player::potionCheckValidity()
     return "Potion effects cleared: " + potConcat;
 }
 
+void Player::setName(std::string name)
+{
+    this->name = name;
+}
+
+std::string Player::getName() const
+{
+    return this->name;
+}
+
 double Player::getAccBoost() const
 {
     return this->accBoost;
@@ -242,8 +218,7 @@ item* Player::getItemAtIndex(int index) const
     return this->inventory[index].get();
 }
 
-int Player::getMAX_INVENTORY_SIZE()
+int Player::getMAX_INVENTORY_SIZE() const
 {
     return this->MAX_INVENTORY_SIZE;
 }
-

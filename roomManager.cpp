@@ -1,18 +1,16 @@
-//
-// Created by rasmu on 2025-08-26.
-//
+#include <iostream>
 #include "roomManager.h"
 #include "./characterCode/skeleton.h"
-#include <iostream>
-
+#include "combat.h"
 #include "characterCode/dragon.h"
 
-
-void roomManager()
+void roomManager(Player& player)
 {
+
 
     Player player = Player();
     int roomCount = 5; //amount of rooms to explore before the boss is encountered
+
 
     for (int i = 0; i < roomCount; i++)
     {
@@ -24,10 +22,12 @@ void roomManager()
     }
     combat(new Dragon(), player);
     printFile("../Art/winText.txt");
+
     std::cout << "\n you defeated the evil dragon and earned his treasures! \n";
     std::cout << "\n 1: return to main menu. \n";
     menuInput(1);
     printMainMenu();
+
 }
 
 
@@ -41,18 +41,24 @@ void roomPrint(Rooms room)
 
 int roomInput(Rooms room, Player& player)
 {
+    bool eventTriggered = false;
 
-    int input = menuInput(2);
-    switch (input)
+    while (!eventTriggered)
     {
-        case 1:
-            triggerEvent(room, player);
-        break;
+        roomPrint(room);
+        int input = menuInput(2);
+        switch (input)
+        {
+            case 1:
+                triggerEvent(room, player);
+                eventTriggered = true;
+            break;
 
-        case 2:
-            openInventory(player);
-        break;
+            case 2:
+                openInventory(player);
+            break;
 
+        }
     }
     return 1;
 }
@@ -76,10 +82,8 @@ int triggerEvent(Rooms room, Player& player)
         }
         combat(enemy, player);
 
-        enemy = nullptr;
         delete enemy;
-
-
+        enemy = nullptr;
     }
     finishRoom(room, player);
     std::cout << "test";
@@ -92,6 +96,14 @@ int finishRoom(Rooms room, Player& player)
     int itemCount = room.getItemCount();
 
     for (int i = 0; i < itemCount; i++)
+
+    {
+        roomItems.push_back(room.getItemAtIndex(i));
+    }
+
+
+    while (true)
+
     {
         roomItems.push_back(room.getItemAtIndex(i));
     }
@@ -99,7 +111,6 @@ int finishRoom(Rooms room, Player& player)
 
     while (true)
     {
-
         //give loot
         int menuChoices = 0;
         clearScreen();
@@ -132,6 +143,7 @@ int finishRoom(Rooms room, Player& player)
         roomItems.erase(roomItems.begin() + input-1);
         itemCount--;
 
+
         player.printItems();
 
            /* for (int i = 0; i < menuChoices; i++)
@@ -147,6 +159,8 @@ int finishRoom(Rooms room, Player& player)
             }*/
 
 
+
+        player.printItems();
     }
     return 1;
 }
