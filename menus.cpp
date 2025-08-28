@@ -22,11 +22,9 @@ int printMainMenu()
     std::cout << std::endl;
     prt("1) start game");
     std::cout << std::endl;
-    prt("2) reset save");
-    std::cout << std::endl;
-    prt("3) exit game");
+    prt("2) exit game");
     Player player = Player();
-    int input = menuInput(3);
+    int input = menuInput(2);
     switch (input)
     {
         case 1:
@@ -35,12 +33,7 @@ int printMainMenu()
 
         case 2:
 
-            player.resetPlayerData();
-            printMainMenu();
-                break;
-        case 3:
             exit(0);
-            break;
     }
 }
 

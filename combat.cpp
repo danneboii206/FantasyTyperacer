@@ -20,7 +20,12 @@ int combat(Enemy* enemy, Player& player)
     double accuracyPercent = 0;
     double wordsPerMinute = 0;
 
-
+    clearScreen();
+    printFile(enemy->getArt());
+    std::cout << enemy->getName() << ": " << enemy->getHealth() << "/" << enemy->getMaxHealth() << " hp" << std::endl;
+    printFile(enemy->getDescription());
+    prt("player hp: " << player.getHealth());
+    prt("type the following line to attack:");
 
 
     bool inCombat = true;
@@ -206,7 +211,6 @@ void printBattle(Enemy enemy, std::string line, Player& player)
     clearScreen();
     printFile(enemy.getArt());
     std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
-    printFile(enemy.getDescription());
     prt("player hp: " << player.getHealth());
     prt("type the following line to attack:");
     prt(line);
