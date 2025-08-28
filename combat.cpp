@@ -39,8 +39,12 @@ int combat(Enemy* enemy, Player& player)
         if (enemy->getHealth() <= 0)
             inCombat = false;
 
+        if (player.getHealth() <= 0)
+            return 0;
+
         player.takeDamage(enemy->getDamage());
     }
+
 
     player.potionCheckValidity();
     return 1;

@@ -6,7 +6,10 @@
 #include "./characterCode/Player.h"
 #include "items/weapon.h"
 #include "items/armor.h"
-#include <sanitizer/lsan_interface.h>
+//#include <sanitizer/lsan_interface.h>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
 #define prt(x) std::cout << x << std::endl
 
@@ -34,7 +37,8 @@ void printMainMenu()
             roomManager(player);
             break;
         case 2:
-            __lsan_do_leak_check();
+            //__lsan_do_leak_check();
+            _CrtDumpMemoryLeaks();
             exit(0);
     }
 }
