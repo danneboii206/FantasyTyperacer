@@ -1,8 +1,8 @@
 #include "consumable.h"
 
 consumable::consumable(std::string itemName, std::string description, double wpmBoost, double accBoost,
-    double hpBoost, int duration, double instantHeal, std::string type)
-        : item(itemName, description, wpmBoost, accBoost, hpBoost, type),
+    double hpBoost, int duration, double instantHeal)
+        : item(itemName, description, wpmBoost, accBoost, hpBoost),
           duration(duration), instantHeal(instantHeal)
 {
 }
@@ -13,7 +13,7 @@ consumable::~consumable()
 
 std::string consumable::getType() const
 {
-    return item::getType();
+    return "consumable";
 }
 
 void consumable::roundOver()

@@ -31,13 +31,20 @@ int combat(Enemy* enemy, Player& player)
         int input = menuInput(2);
 
         if (input == 1)
+        {
             typeRacer(*enemy, wordsWritten, lettersWritten, wrongLetters, damage, accuracyPercent, wordsPerMinute, player);
+        }
 
         if (input == 2)
+        {
             openInventory(player);
+            continue;
+        }
 
         if (enemy->getHealth() <= 0)
+        {
             inCombat = false;
+        }
 
         if (player.getHealth() <= 0)
             return 0;

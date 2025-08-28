@@ -11,9 +11,9 @@ private:
 public:
     armor() = delete;
     armor(std::string itemName, std::string description, double wpmBoost,
-          double accBoost, double hpBoost, std::string type = "armor" );
+          double accBoost, double hpBoost);
     ~armor() override;
-    virtual std::string getType() const override;
+    std::string getType() const override;
     bool getIsEquipped() const;
     void setIsEquipped(bool isEquipped);
 };

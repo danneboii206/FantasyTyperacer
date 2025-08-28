@@ -7,13 +7,14 @@
 int main()
 {
     //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
-    int *shit = new int(2);
     Rooms room = Rooms();
 
     while (true)
     {
-        printMainMenu();
+        if (printMainMenu() == -5)
+        {
+            return 0;
+        }
     }
 }
 

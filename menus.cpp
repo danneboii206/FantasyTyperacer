@@ -13,7 +13,7 @@
 
 #define prt(x) std::cout << x << std::endl
 
-void printMainMenu()
+int printMainMenu()
 {
     clearScreen();
     //prints logo
@@ -39,7 +39,7 @@ void printMainMenu()
         case 2:
             //__lsan_do_leak_check();
             //_CrtDumpMemoryLeaks();
-            exit(0);
+            return -5;
     }
 }
 
@@ -76,7 +76,7 @@ int menuInput(int menuChoices)
 
         if (isNumber(strInput) == false)
         {
-            prt("Wrong input, press enter to try again.");
+            prt("Wrong input, press any key + enter to try again.");
             std::cin >> strInput;
             break;
         }
@@ -90,7 +90,7 @@ int menuInput(int menuChoices)
         }
 
 
-        prt("Wrong input, press enter to try again.");
+        prt("Wrong input, press any key + enter to try again.");
         std::cin >> strInput;
     }
 

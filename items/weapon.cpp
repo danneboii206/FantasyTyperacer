@@ -1,8 +1,8 @@
 #include "weapon.h"
 
 weapon::weapon(std::string itemName, std::string description,
-              double wpmBoost, double accBoost, double hpBoost, std::string type)
-    : item(itemName, description, wpmBoost, accBoost, hpBoost, type), isEquipped(false)
+              double wpmBoost, double accBoost, double hpBoost)
+    : item(itemName, description, wpmBoost, accBoost, hpBoost), isEquipped(false)
 {
 }
 
@@ -12,7 +12,7 @@ weapon::~weapon()
 
 std::string weapon::getType() const
 {
-    return item::getType();
+    return "weapon";
 }
 
 bool weapon::getIsEquipped() const
