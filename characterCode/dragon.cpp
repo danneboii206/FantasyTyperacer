@@ -1,7 +1,7 @@
 #include "dragon.h"
 
 Dragon::Dragon()
-    : Enemy(20, 200, "Dragon")
+    : Enemy(50, 200, "Dragon")
 {
     setName("Dragon");
     setDescriptionPath("../descriptions/enemyDescriptions/dragonDescription.txt");

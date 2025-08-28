@@ -6,7 +6,7 @@
 
 void roomManager(Player& player)
 {
-    int roomCount = 4; //amount of rooms to explore before the boss is encountered
+    int roomCount = 1; //amount of rooms to explore before the boss is encountered
 
     for (int i = 0; i < roomCount; i++)
     {
@@ -16,14 +16,17 @@ void roomManager(Player& player)
 
         roomInput(room, player);
     }
-    if (combat(new Dragon(), player) == 0)
+    if (combat(new Dragon(), player) <= 0)
     {
         std::cout << "you died! press 1 to return to main menu.";
         menuInput(1);
         printMainMenu();
     }
+    clearScreen();
     printFile("../Art/winText.txt");
-    std::cout << "\n 1: return to main menu \n";
+    std::cout << std::endl << "Congratulations " << player.getName() <<
+                 ", you have defeated the dragon and all the dungeons riches are now yours!" << std::endl;
+    std::cout << "\n1: return to main menu \n";
     menuInput(1);
     printMainMenu();
 }
