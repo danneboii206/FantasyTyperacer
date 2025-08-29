@@ -13,7 +13,7 @@ int main()
     {
         if (printMainMenu() == -5)
         {
-            return 5;
+            return 0;
         }
     }
 }
