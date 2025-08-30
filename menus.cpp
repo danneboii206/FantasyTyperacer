@@ -2,18 +2,20 @@
 #include <fstream>
 #include <string>
 #include "menus.h"
-#include "roomManager.h"
 #include "./characterCode/Player.h"
 #include "items/weapon.h"
 #include "items/armor.h"
-//#include <sanitizer/lsan_interface.h>
-//#define _CRTDBG_MAP_ALLOC
-//#include <stdlib.h>
-//#include <crtdbg.h>
 
-#define prt(x) std::cout << x << std::endl
 
-int printMainMenu()
+
+
+menus::menus()
+{
+    //theRoomManager = new RoomManager();
+}
+
+/*
+int menus::printMainMenu()
 {
     clearScreen();
     //prints logo
@@ -34,22 +36,21 @@ int printMainMenu()
             prt("What's your name?");
             std::cin >> name;
             player.setName(name);
-            roomManager(player);
+            theRoomManager->roomManager(player);
             break;
         case 2:
-            //__lsan_do_leak_check();
-            //_CrtDumpMemoryLeaks();
             return -5;
     }
-}
+    return 0;
+}*/
 
-void clearScreen()
+void menus::clearScreen()
 {
     for (int i = 0; i < 80; i++)
         std::cout << std::endl;
 }
 
-void printFile(std::string filePath)
+void menus::printFile(std::string filePath)
 {
     std::ifstream file(filePath); // Changed to ifstream for reading
     if (file.is_open()) {
@@ -63,7 +64,7 @@ void printFile(std::string filePath)
     }
 }
 
-int menuInput(int menuChoices)
+int menus::menuInput(int menuChoices)
 {
     std::string strInput;
     int selecting = true;
@@ -98,7 +99,7 @@ int menuInput(int menuChoices)
 
 }
 
-bool isNumber(const std::string input)
+bool menus::isNumber(const std::string input)
 {
     for (int i = 0; i < input.length(); i++) //iterates through string. returns false if char can't be converted to int.
     {
@@ -111,7 +112,7 @@ bool isNumber(const std::string input)
 }
 
 //prints information about a given item
-void openInventory(Player& player)
+void menus::openInventory(Player& player)
 {
 
     std::vector<std::shared_ptr<item>> playerItems;
@@ -167,7 +168,7 @@ void openInventory(Player& player)
 
 }
 
-void interactWithItem(Player& player, int index)
+void menus::interactWithItem(Player& player, int index)
 {
     clearScreen();
         if (player.getItemAtIndex(index) == nullptr)
