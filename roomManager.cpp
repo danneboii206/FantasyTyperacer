@@ -3,8 +3,46 @@
 #include "./characterCode/skeleton.h"
 #include "combat.h"
 #include "characterCode/dragon.h"
+#include "rooms.h"
+#include "menus.h"
 
-void roomManager(Player& player)
+
+RoomManager::RoomManager()
+{
+    menu = menus();
+    theCombat = Combat();
+}
+
+int RoomManager::printMainMenu()
+{
+    menu.clearScreen();
+    //prints logo
+    menu.printFile("../bardic.txt");
+
+    prt("enter the number corresponding to the choice you would like to make.");
+    std::cout << std::endl;
+    prt("1) start game");
+    std::cout << std::endl;
+    prt("2) exit game");
+    std::cout << std::endl;
+    Player player;
+    std::string name;
+    int input = menu.menuInput(2);
+    switch (input)
+    {
+        case 1:
+            prt("What's your name?");
+        std::cin >> name;
+        player.setName(name);
+        roomManager(player);
+        break;
+        case 2:
+            return -5;
+    }
+    return 0;
+}
+
+void RoomManager::roomManager(Player& player)
 {
     const int roomCount = 4; //amount of rooms to explore before the boss is encountered
 
@@ -18,7 +56,7 @@ void roomManager(Player& player)
     }
     Dragon* dragon = new Dragon();
     std::string waitInp;
-    if (combat(dragon, player) == 0)
+    if (theCombat.combat(dragon, player) == 0)
     {
         delete dragon;
         dragon = nullptr;
@@ -27,8 +65,8 @@ void roomManager(Player& player)
         std::cin >> waitInp;
         return;
     }
-    clearScreen();
-    printFile("../Art/winText.txt");
+    menu.clearScreen();
+    menu.printFile("../Art/winText.txt");
     std::cout << std::endl << "Congratulations " << player.getName() <<
                  ", you have defeated the dragon and all the dungeons riches are now yours!" << std::endl;
     std::cout << "\npress any key + enter to return to main menu. \n";
@@ -39,22 +77,22 @@ void roomManager(Player& player)
 }
 
 
-void roomPrint(Rooms room)
+void RoomManager::roomPrint(Rooms room)
 {
-    clearScreen();
-    printFile(room.getDescription());
+    menu.clearScreen();
+    menu.printFile(room.getDescription());
     std::cout<< "\n" << "1: Proceed" << "\n";
     std::cout<< "\n" << "2: Use item" << "\n";
 }
 
-int roomInput(Rooms room, Player& player)
+int RoomManager::roomInput(Rooms room, Player& player)
 {
     bool eventTriggered = false;
 
     while (!eventTriggered)
     {
         roomPrint(room);
-        int input = menuInput(2);
+        int input = menu.menuInput(2);
         switch (input)
         {
             case 1:
@@ -63,7 +101,7 @@ int roomInput(Rooms room, Player& player)
             break;
 
             case 2:
-                openInventory(player);
+                menu.openInventory(player);
             break;
 
         }
@@ -71,7 +109,7 @@ int roomInput(Rooms room, Player& player)
     return 1;
 }
 
-int triggerEvent(Rooms room, Player& player)
+int RoomManager::triggerEvent(Rooms room, Player& player)
 {
     if (room.getHasEnemy() == true)
     {
@@ -88,10 +126,11 @@ int triggerEvent(Rooms room, Player& player)
                 enemy = new Skeleton();
 
         }
-        if (combat(enemy, player) == 0)
+        theCombat = Combat();
+        if (theCombat.combat(enemy, player) == 0)
         {
             std::cout << "you died! press 1 to return to main menu.";
-            menuInput(1);
+            menu.menuInput(1);
             printMainMenu();
         }
 
@@ -103,7 +142,7 @@ int triggerEvent(Rooms room, Player& player)
     return 1;
 }
 
-int finishRoom(Rooms room, Player& player)
+int RoomManager::finishRoom(Rooms room, Player& player)
 {
     std::vector<std::shared_ptr<item>> roomItems;
     int itemCount = room.getItemCount();
@@ -118,7 +157,7 @@ int finishRoom(Rooms room, Player& player)
     {
         //give loot
         int menuChoices = 0;
-        clearScreen();
+        menu.clearScreen();
 
         if (itemCount == 0)
             std::cout << " \n There are no items to pick up \n";
@@ -137,7 +176,7 @@ int finishRoom(Rooms room, Player& player)
         }
 
         std::cout<< "\n" << menuChoices+1 << ": leave" << "\n";
-        int input = menuInput(menuChoices + 1);
+        int input = menu.menuInput(menuChoices + 1);
         std::cout << input;
 
         if (input == menuChoices+1)

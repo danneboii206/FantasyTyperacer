@@ -8,8 +8,15 @@
 #include "characterCode/Player.h"
 
 #define prt(x) std::cout << x << std::endl
+
+Combat::Combat()
+{
+    menu = menus();
+}
+
+
 ///central method for combat which initiates the combat.
-int combat(Enemy* enemy, Player& player)
+int Combat::combat(Enemy* enemy, Player& player)
 {
     int wordsWritten = 0;
     int lettersWritten = 0;
@@ -21,14 +28,14 @@ int combat(Enemy* enemy, Player& player)
     bool inCombat = true;
     while(inCombat == true)
     {
-        printFile(enemy->getArtPath());
+        menu.printFile(enemy->getArtPath());
         std::cout << enemy->getName() << ": " << enemy->getHealth() << "/" << enemy->getMaxHealth() << " hp" << std::endl;
-        printFile(enemy->getDescriptionPath());
+        menu.printFile(enemy->getDescriptionPath());
         prt("Would you like to:");
         prt("1: Attack");
         prt("2: Use item");
 
-        int input = menuInput(2);
+        int input = menu.menuInput(2);
 
         if (input == 1)
         {
@@ -37,7 +44,7 @@ int combat(Enemy* enemy, Player& player)
 
         if (input == 2)
         {
-            openInventory(player);
+            menu.openInventory(player);
             continue;
         }
 
@@ -58,7 +65,7 @@ int combat(Enemy* enemy, Player& player)
 }
 
 
-double typeRacer(Enemy& enemy,
+double Combat::typeRacer(Enemy& enemy,
     int& wordsWritten, int& lettersWritten, int& wrongLetters,
     double& damage, double& accuracyPercent, double& wordsPerMinute,
     Player& player)
@@ -94,7 +101,7 @@ double typeRacer(Enemy& enemy,
 }
 
 /// inputs string returns word count of string
-int wordCount(std::string word)
+int Combat::wordCount(std::string word)
 {
     int words = 0;
     char lastChar = ' ';
@@ -112,7 +119,7 @@ int wordCount(std::string word)
 }
 
 ///returns name of random .txt file from lyrics directory
-std::string lyricSelector()
+std::string Combat::lyricSelector()
 {
     std::string filePath = "../lyrics";
     int directorySize = 0;
@@ -143,7 +150,7 @@ std::string lyricSelector()
 
 ///input two lines, each letter of line2 is compared against line1
 ///returns the number of incorrect letters
-int lineAccuracy(std::string line1, std::string line2)
+int Combat::lineAccuracy(std::string line1, std::string line2)
 {
     int incorrectLetters = 0;
 
@@ -173,17 +180,17 @@ int lineAccuracy(std::string line1, std::string line2)
     return incorrectLetters;
 }
 
-void printOptions(Player & player)
+void Combat::printOptions(Player & player)
 {
-    clearScreen();
+    menu.clearScreen();
     prt("would you like to use an item)");
     player.printItems();
 }
 
-void printBattle(Enemy enemy, std::string line, Player& player)
+void Combat::printBattle(Enemy enemy, std::string line, Player& player)
 {
-    clearScreen();
-    printFile(enemy.getArtPath());
+    menu.clearScreen();
+    menu.printFile(enemy.getArtPath());
     std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
     //printFile(enemy.getDescriptionPath());
     prt("player hp: " << player.getHealth());

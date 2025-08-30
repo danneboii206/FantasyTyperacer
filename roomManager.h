@@ -3,10 +3,24 @@
 
 #include "rooms.h"
 #include "menus.h"
+#include "combat.h"
 
-void roomManager(Player& player);
-void roomPrint(Rooms room);
-int roomInput(Rooms room, Player& player);
-int triggerEvent(Rooms room, Player& player);
-int finishRoom(Rooms room, Player& player);
+class menus;
+
+class RoomManager
+{
+private:
+    menus menu;
+    Combat theCombat;
+
+public:
+    RoomManager();
+    int printMainMenu();
+    void roomManager(Player& player);
+    void roomPrint(Rooms room);
+    int roomInput(Rooms room, Player& player);
+    int triggerEvent(Rooms room, Player& player);
+    int finishRoom(Rooms room, Player& player);
+};
+
 #endif //ROOMMANAGER_H
