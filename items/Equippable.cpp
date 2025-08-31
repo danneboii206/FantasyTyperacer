@@ -2,7 +2,7 @@
 
 
 Equippable::Equippable(std::string itemName)
-        : item(itemName, "", "", "", ""), type(""), isEquipped(false)
+        : item(itemName, "", 0, 0, 0), type(""), isEquipped(false)
 {
     getDataFromName(itemName);
 }
@@ -13,7 +13,7 @@ Equippable::~Equippable()
 
 void Equippable::getDataFromName(std::string name)
 {
-    std::string dir = "consumables/";
+    std::string dir = "Equippables/";
     static const std::unordered_map<std::string, std::string> map = {
         {"Divine Sword", "divineSword.txt"},
         {"Dragon Armor", "dragonArmor.txt"},

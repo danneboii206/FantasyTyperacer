@@ -16,8 +16,8 @@ protected:
   double hpBoost; //flat hp bonus
 public:
   item();
-  item(std::string itemName, std::string description, std::string  wpmBoost,
-    std::string  accBoost, std::string  hpBoost);
+  item(std::string itemName, std::string description, double  wpmBoost,
+    double  accBoost, double  hpBoost);
   virtual ~item();
   virtual void getDataFromName(std::string name) = 0;
   int strToWpm(const std::string& str);

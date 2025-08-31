@@ -150,29 +150,30 @@ void menus::interactWithItem(Player& player, int index)
         }
 
     item* itemAtIndex = player.getItemAtIndex(index);
-    std::string type = itemAtIndex->getType();
+    std::string type;
     bool equipped = false;
 
-    if (type == "armor")
+
+    Equippable* equPtr = dynamic_cast<Equippable*>(itemAtIndex);
+    if (equPtr != nullptr)
     {
-        Equippable* armorPtr = dynamic_cast<Equippable*>(itemAtIndex);
-        equipped = armorPtr->getIsEquipped();
-    } else if (type == "weapon")
+        type = equPtr->getType();
+        equipped = equPtr->getIsEquipped();
+    } else
     {
-        Equippable* weaponPtr = dynamic_cast<Equippable*>(itemAtIndex);
-        equipped = weaponPtr->getIsEquipped();
+        type = "Consumable";
     }
 
     std::cout << "\n" << itemAtIndex->getName() << "\n";
     std::cout << "\n" << itemAtIndex->getDescription() << "\n";
     std::cout << "\n" << "type: " << type << "\n";
 
-    if (type == "consumable")
+    if (type == "Consumable")
     {
         std::cout << "\n" << "1: use item" << "\n";
         std::cout<< "\n" << "2: discard item" << "\n";
         std::cout << "\n" << "3: leave" << "\n";
-    } else if (type != "consumable" && equipped == false)
+    } else if (type != "Consumable" && equipped == false)
     {
         std::cout << "\n" << "1: equip item" << "\n";
         std::cout<< "\n" << "2: discard item" << "\n";
@@ -188,9 +189,9 @@ void menus::interactWithItem(Player& player, int index)
 
     if (input == 1)
     {
-        if (type == "consumable")
+        if (type == "Consumable")
             player.consumePotion(index);
-        else if (type != "consumable" && equipped == false )
+        else if (type != "Consumable" && equipped == false )
             player.equipItem(index);
         else
             player.unequipItem(index);

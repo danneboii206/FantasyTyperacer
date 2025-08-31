@@ -3,7 +3,7 @@
 #include <semaphore>
 
 consumable::consumable(std::string itemName)
-        : item(itemName, "", "", "", "")
+        : item(itemName, "", 0, 0, 0)
 {
     getDataFromName(itemName);
 }
@@ -15,16 +15,16 @@ consumable::~consumable()
 //gets data from text files using name of object
 void consumable::getDataFromName(std::string name)
 {
-    std::string dir = "consumables/";
+    std::string dir = "../items/Consumables/";
     static const std::unordered_map<std::string, std::string> map = {
-        {"Accuracy Potion", "consumables/accuracyPotion.txt"},
-        {"Big Healing Potion", "consumables/bigHealingPotion.txt"},
-        {"Healing Potion", "consumables/healingPotion.txt"},
-        {"Shiny Stone", "consumables/shinyStone.txt"}
+        {"Accuracy Potion", "accuracyPotion.txt"},
+        {"Big Healing Potion", "bigHealingPotion.txt"},
+        {"Healing Potion", "healingPotion.txt"},
+        {"Shiny Stone", "shinyStone.txt"}
     };
     auto it = map.find(name)->second;
     dir += it;
-    std::ifstream file (it);
+    std::ifstream file (dir);
     std::string line;
     int linecount = 0;
     while (getline(file, line))
@@ -91,7 +91,7 @@ double consumable::strToHealAmount(const std::string& str) {
 
 std::string consumable::getType() const
 {
-    return "consumable";
+    return "Consumable";
 }
 
 void consumable::roundOver()

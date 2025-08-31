@@ -7,7 +7,7 @@ item::item()    : itemName(""), description("description"),
 }
 
 item::item(std::string itemName, std::string description,
-      std::string wpmBoost, std::string accBoost, std::string hpBoost)
+      double wpmBoost, double accBoost, double hpBoost)
     : itemName(itemName), description(description)
 {
 
