@@ -3,6 +3,7 @@
 
 #include "character.h"
 #include "../items/item.h"
+#include "../items/Equippable.h"
 #include "../items/consumable.h"
 #include <vector>
 #include <memory>

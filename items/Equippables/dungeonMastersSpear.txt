@@ -1,0 +1,6 @@
+"Dungeon Masters Spear"
+"The spear left behind by the old dungeon master (40WPM boost)"
+MAX_WPM_BOOST
+NO_ACC_BOOST
+NO_HP_BOOST
+"Weapon"

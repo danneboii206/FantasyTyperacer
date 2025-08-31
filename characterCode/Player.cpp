@@ -1,7 +1,5 @@
 #include "Player.h"
 #include <iostream>
-#include "../items/armor.h"
-#include "../items/weapon.h"
 
 Player::Player()
     : Character(200), accBoost(0), wpmBoost(0)
@@ -22,21 +20,16 @@ std::string Player::addItemToInventory(item& Item)
         return "Space is full! Consider dropping an item";
     }
 
-    if (type == "consumable")
-    {   //due to consumable being the only one with extra data (duration), everything else is just an item basically.
-        consumable* potionPtr = dynamic_cast<consumable*>(&Item);
 
-        inventory.push_back(std::make_unique<consumable>(*potionPtr));
-    } else if (type == "weapon")
+    consumable* potionPtr = dynamic_cast<consumable*>(&Item);
+    if (potionPtr != nullptr)
     {
-        weapon* weaponPtr = dynamic_cast<weapon*>(&Item);
-
-        inventory.push_back(std::make_unique<weapon>(*weaponPtr));
+        inventory.push_back(std::make_unique<consumable>(*potionPtr));
     } else
     {
-        armor* armorPtr = dynamic_cast<armor*>(&Item);
+        Equippable* equippablePtr = dynamic_cast<Equippable*>(&Item);
 
-        inventory.push_back(std::make_unique<armor>(*armorPtr));
+        inventory.push_back(std::make_unique<Equippable>(*equippablePtr));
     }
 
     return "Picked up item: " + this->inventory[this->inventory.size() - 1]->getName() + ".";
@@ -45,8 +38,6 @@ std::string Player::addItemToInventory(item& Item)
 std::string Player::removeItemFromInventory(int index)
 {
     std::string itemName = inventory[index]->getName();
-
-
 
     inventory.erase(inventory.begin() + index);
 
@@ -58,7 +49,7 @@ std::string Player::equipItem(int index)
     item* itemAtIndex = this->getItemAtIndex(index);
     std::string type = itemAtIndex->getType();
 
-    //first, check if there's nothing equipped in its place
+    Equippable* equPtr = static_cast<Equippable*>(this->inventory[index].get());
     if (type == "armor" && this->getEquippedArmorIndex() != -1)
     {
         return "Please un-equip the armor: " + this->inventory[this->getEquippedArmorIndex()]->getName() + ".";
@@ -72,15 +63,8 @@ std::string Player::equipItem(int index)
     this->accBoost += itemAtIndex->getAccuracyBoost();
     this->setMaxHealth(this->getMaxHealth() + itemAtIndex->getHpBoost());
     this->wpmBoost += itemAtIndex->getWpmBoost();
-    if (type == "armor")
-    {
-        armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
-        armorPtr->setIsEquipped(true);
-    } else
-    {
-        weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
-        weaponPtr->setIsEquipped(true);
-    }
+    equPtr->setIsEquipped(true);
+
     return "Equipped " + itemAtIndex->getName() + ".";
 }
 
@@ -98,26 +82,19 @@ std::string Player::unequipItem(int index)
     }
     this->wpmBoost -= itemAtIndex->getWpmBoost();
 
-    if (type == "armor")
-    {
-        armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
-        armorPtr->setIsEquipped(false);
-    }
-    else if (type == "weapon")
-    {
-        weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
-        weaponPtr->setIsEquipped(false);
-    }
+    Equippable* equPtr = static_cast<Equippable*>(itemAtIndex);
+    equPtr->setIsEquipped(false);
+
     return "Un-equipped " + itemAtIndex->getName() + ".";
 
 }
 
 void Player::consumePotion(int index)
 {
-    consumable* potPtr = dynamic_cast<consumable*>(this->inventory[index].get());
+    consumable* potPtr = static_cast<consumable*>(this->inventory[index].get());
     std::string potName = potPtr->getName();
 
-    if (potName == "Healing Potion" || potName == "Big Healing Potion" )
+    if (potPtr->getInstantHeal() > NO_HEAL_AMOUNT)
     {
         double hpAm = potPtr->getInstantHeal();
         double hpFinal = this->getHealth() + hpAm;
@@ -190,10 +167,10 @@ int Player::getEquippedArmorIndex() const
     {
         bool equipped = false;
 
-        armor* armorPtr = dynamic_cast<armor*>(this->inventory[i].get());
-        if (armorPtr != nullptr)
+        Equippable* equPtr = dynamic_cast<Equippable*>(this->inventory[i].get());
+        if (equPtr != nullptr && equPtr->getType() == "Armor")
         {
-            equipped = armorPtr->getIsEquipped();
+            equipped = equPtr->getIsEquipped();
 
             if (equipped == true)
             {
@@ -210,10 +187,10 @@ int Player::getEquippedWeaponIndex() const
     {
         bool equipped = false;
 
-        weapon* weaponPtr = dynamic_cast<weapon*>(this->inventory[i].get());
-        if (weaponPtr != nullptr)
+        Equippable* equPtr = dynamic_cast<Equippable*>(this->inventory[i].get());
+        if (equPtr != nullptr && equPtr->getType() == "Weapon")
         {
-            equipped = weaponPtr->getIsEquipped();
+            equipped = equPtr->getIsEquipped();
 
             if (equipped == true)
             {
@@ -233,7 +210,6 @@ void Player::printItems() const
     }
 }
 
-//STRICTLY FOR TESTING, REMOVE B4 INLÄMNING
 void Player::printStats() const
 {
     std::cout << "wpm boost: +" << this->wpmBoost << "wpm, accuracy boost: +"
