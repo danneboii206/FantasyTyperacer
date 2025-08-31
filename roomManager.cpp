@@ -1,8 +1,6 @@
 #include <iostream>
 #include "roomManager.h"
-#include "./characterCode/skeleton.h"
 #include "combat.h"
-#include "characterCode/dragon.h"
 #include "rooms.h"
 #include "menus.h"
 
@@ -54,7 +52,9 @@ void RoomManager::roomManager(Player& player)
 
         roomInput(room, player);
     }
-    Dragon* dragon = new Dragon();
+    Enemy* dragon = new Enemy(50, 200, "Dragon");
+    dragon->setDescriptionPath("../descriptions/enemyDescriptions/dragonDescription.txt");
+    dragon->setArtPath("../art/enemyPortraits/dragon.txt");
     std::string waitInp;
     if (theCombat.combat(dragon, player) == 0)
     {
@@ -69,7 +69,7 @@ void RoomManager::roomManager(Player& player)
     menu.printFile("../Art/winText.txt");
     std::cout << std::endl << "Congratulations " << player.getName() <<
                  ", you have defeated the dragon and all the dungeons riches are now yours!" << std::endl;
-    std::cout << "\npress any key + enter to return to main menu. \n";
+    std::cout << "\n press any key + enter to return to main menu. \n";
     std::cin >> waitInp;
 
     delete dragon;
@@ -119,11 +119,16 @@ int RoomManager::triggerEvent(Rooms room, Player& player)
         switch (rnd)
         {
             case 0:
-                enemy = new Goblin();
+                enemy = new Enemy(10, 100, "Goblin");
+                enemy->setDescriptionPath("../descriptions/enemyDescriptions/goblinDescription.txt");
+                enemy->setArtPath("../art/enemyPortraits/goblin.txt");
+
             break;
 
             case 1:
-                enemy = new Skeleton();
+                enemy = new Enemy(20, 50, "Skeleton");
+                enemy->setDescriptionPath("../descriptions/enemyDescriptions/skeletonDescription.txt");
+                enemy->setArtPath("../art/enemyPortraits/skeleton.txt");
 
         }
         theCombat = Combat();
