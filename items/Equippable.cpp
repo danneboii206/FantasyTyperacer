@@ -4,7 +4,7 @@
 Equippable::Equippable(std::string itemName)
         : item(itemName, "", "", "", ""), type(""), isEquipped(false)
 {
-
+    getDataFromName(itemName);
 }
 
 Equippable::~Equippable()

@@ -10,9 +10,7 @@ item::item(std::string itemName, std::string description,
       std::string wpmBoost, std::string accBoost, std::string hpBoost)
     : itemName(itemName), description(description)
 {
-    this->wpmBoost = strToWpm(wpmBoost);
-    this->accBoost = strToAcc(accBoost);
-    this->hpBoost = strToHp(hpBoost);
+
 }
 
 item::~item()
