@@ -11,9 +11,9 @@ private:
   std::string type;
 public:
   Equippable() = delete;
-  Equippable(std::string itemName, std::string description, double wpmBoost,
-    double accBoost, double hpBoost, std::string type);
+  Equippable(std::string itemName);
   ~Equippable() override;
+  void getDataFromName(std::string name) override;
   std::string getType() const;
   bool getIsEquipped() const;
   void setIsEquipped(bool isEquipped);

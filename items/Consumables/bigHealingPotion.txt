@@ -1,5 +1,5 @@
-"Big Healing Potion"
-"Heals 100 HP"
+Big Healing Potion
+Heals 100 HP
 NO_WPM_BOOST
 NO_ACC_BOOST
 NO_HP_BOOST

@@ -1,21 +1,28 @@
 #include <fstream>
 #include <random>
 #include "rooms.h"
-#include "./items/allItems.h"
+#include "items/item.h"
+#include "items/consumable.h"
+#include "items/Equippable.h"
 #include <memory>
 #include <filesystem>
 
 Rooms::Rooms()
 
 {
+    //item pool of room
     allItems =
         {
-      std::make_shared<shinyStone>(), std::make_shared<shinyStone>(), std::make_shared<shinyStone>(), std::make_shared<shinyStone>(),
-      std::make_shared<accPotion>(), std::make_shared<accPotion>(), std::make_shared<accPotion>(),
-      std::make_shared<hpPotion>(), std::make_shared<hpPotion>(), std::make_shared<hpPotion>(),
-      std::make_shared<rasmusStick>(), std::make_shared<rasmusStick>(),
-      std::make_shared<bigHpPotion>(), std::make_shared<divineSword>(), std::make_shared<dragonArmor>(), std::make_shared<dungeonMastersSpear>()
+      std::make_shared<consumable>("Shiny Stone"), std::make_shared<consumable>("Shiny Stone"),
+        std::make_shared<consumable>("Shiny Stone"), std::make_shared<consumable>("Shiny Stone"),
+      std::make_shared<consumable>("Accuracy Potion"), std::make_shared<consumable>("Accuracy Potion"),
+        std::make_shared<consumable>("Accuracy Potion"), std::make_shared<consumable>("Healing Potion"),
+        std::make_shared<consumable>("Healing Potion"), std::make_shared<consumable>("Healing Potion"),
+      std::make_shared<Equippable>("Rasmus' stick"), std::make_shared<Equippable>("Rasmus' stick"),
+      std::make_shared<consumable>("Big Healing Potion"), std::make_shared<Equippable>("Divine Sword"),
+        std::make_shared<Equippable>("Dragon Armor"), std::make_shared<Equippable>("Dungeon Masters Spear")
         };
+
     generateRoom();
     description = descriptionSelector();
 }

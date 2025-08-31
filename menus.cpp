@@ -3,8 +3,7 @@
 #include <string>
 #include "menus.h"
 #include "./characterCode/Player.h"
-#include "items/weapon.h"
-#include "items/armor.h"
+#include "items/item.h"
 
 
 
@@ -156,11 +155,11 @@ void menus::interactWithItem(Player& player, int index)
 
     if (type == "armor")
     {
-        armor* armorPtr = dynamic_cast<armor*>(itemAtIndex);
+        Equippable* armorPtr = dynamic_cast<Equippable*>(itemAtIndex);
         equipped = armorPtr->getIsEquipped();
     } else if (type == "weapon")
     {
-        weapon* weaponPtr = dynamic_cast<weapon*>(itemAtIndex);
+        Equippable* weaponPtr = dynamic_cast<Equippable*>(itemAtIndex);
         equipped = weaponPtr->getIsEquipped();
     }
 

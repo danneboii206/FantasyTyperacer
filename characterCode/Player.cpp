@@ -94,7 +94,7 @@ void Player::consumePotion(int index)
     consumable* potPtr = static_cast<consumable*>(this->inventory[index].get());
     std::string potName = potPtr->getName();
 
-    if (potPtr->getInstantHeal() > NO_HEAL_AMOUNT)
+    if (potPtr->getInstantHeal() > 0)
     {
         double hpAm = potPtr->getInstantHeal();
         double hpFinal = this->getHealth() + hpAm;

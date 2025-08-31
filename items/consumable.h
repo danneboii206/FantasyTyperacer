@@ -4,21 +4,8 @@
 #include "item.h"
 #include <string>
 
-enum timeOfEffect
-{
-    ONE_TIME_USE = 0,
-    DURATION_ONE_ROUND = 1,
-    DURATION_TWO_ROUNDS = 2,
-    DURATION_THREE_ROUNDS = 3
-};
 
-enum healAmount
-{
-    NO_HEAL_AMOUNT = 0,
-    VERY_VERY_LOW_HEAL_AMOUNT = 5,
-    LOW_HEAL_AMOUNT = 50,
-    MEDIUM_HEAL_AMOUNT = 100
-};
+
 
 class consumable : public item
 {
@@ -26,9 +13,11 @@ class consumable : public item
     double instantHeal;
 public:
     consumable() = delete;
-    consumable(std::string itemName, std::string description, double wpmBoost,
-               double accBoost, double hpBoost, int duration, double instantHeal);
+    explicit consumable(std::string itemName);
     ~consumable() override;
+    void getDataFromName(std::string name) override ;
+    int strToTimeOfEffect(const std::string& str);
+    double strToHealAmount(const std::string& str);
     std::string getType() const override;
     void roundOver();
     int getDuration() const;
