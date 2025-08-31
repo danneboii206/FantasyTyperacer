@@ -1,5 +1,5 @@
-"Healing Potion"
-"Heals you 50 HP"
+Healing Potion
+Heals you 50 HP
 NO_WPM_BOOST
 NO_ACC_BOOST
 NO_HP_BOOST
