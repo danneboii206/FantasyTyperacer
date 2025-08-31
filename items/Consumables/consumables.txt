@@ -1,0 +1,28 @@
+"Accuracy Potion"
+"Increases accuracy by +10% for one round"
+NO_WPM_BOOST
+MEDIUM_ACC_BOOST
+NO_HP_BOOST
+DURATION_ONE_ROUND
+NO_HEAL_AMOUNT
+"Big Healing Potion"
+"Heals 100 HP"
+NO_WPM_BOOST
+NO_ACC_BOOST
+NO_HP_BOOST
+ONE_TIME_USE
+MEDIUM_HEAL_AMOUNT
+"Healing Potion"
+"Heals you 50 HP"
+NO_WPM_BOOST
+NO_ACC_BOOST
+NO_HP_BOOST
+ONE_TIME_USE
+LOW_HEAL_AMOUNT
+ "Shiny Stone"
+ "Pretty stone! (+5 HP by consuming it due to happiness)"
+ NO_WPM_BOOST
+ NO_ACC_BOOST
+ NO_HP_BOOST
+ ONE_TIME_USE
+ VERY_VERY_LOW_HEAL_AMOUNT
