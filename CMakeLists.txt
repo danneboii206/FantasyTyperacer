@@ -10,9 +10,6 @@ set(CMAKE_EXE_LINKER_FLAGS_DEBUG "")
 add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         characterCode/character.cpp
         characterCode/enemy.cpp
-        characterCode/goblin.cpp
-        characterCode/skeleton.cpp
-        characterCode/skeleton.h
         characterCode/Player.cpp
         characterCode/Player.h
         items/item.cpp
@@ -29,6 +26,4 @@ add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         items/accPotion.cpp
         RoomManager.cpp
         RoomManager.h
-        characterCode/dragon.cpp
-        characterCode/dragon.h
 )

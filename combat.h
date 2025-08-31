@@ -4,10 +4,9 @@
 #include <string>
 
 #include "menus.h"
-#include "characterCode/goblin.h"
+#include "characterCode/enemy.h"
 #include "characterCode/Player.h"
 
-//class menus;
 
 class Combat
 {

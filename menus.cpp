@@ -11,38 +11,8 @@
 
 menus::menus()
 {
-    //theRoomManager = new RoomManager();
 }
 
-/*
-int menus::printMainMenu()
-{
-    clearScreen();
-    //prints logo
-    printFile("../bardic.txt");
-
-    prt("enter the number corresponding to the choice you would like to make.");
-    std::cout << std::endl;
-    prt("1) start game");
-    std::cout << std::endl;
-    prt("2) exit game");
-    std::cout << std::endl;
-    Player player;
-    std::string name;
-    int input = menuInput(2);
-    switch (input)
-    {
-        case 1:
-            prt("What's your name?");
-            std::cin >> name;
-            player.setName(name);
-            theRoomManager->roomManager(player);
-            break;
-        case 2:
-            return -5;
-    }
-    return 0;
-}*/
 
 void menus::clearScreen()
 {
