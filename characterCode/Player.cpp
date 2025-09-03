@@ -10,14 +10,11 @@ Player::~Player()
 {
 }
 
-std::string Player::addItemToInventory(item& Item)
+void Player::addItemToInventory(item& Item)
 {
-    std::string type = Item.getType();
-
-    //first check if there is space
     if (this->inventory.size() == MAX_INVENTORY_SIZE)
     {
-        return "Space is full! Consider dropping an item";
+        return;
     }
 
 
@@ -31,20 +28,14 @@ std::string Player::addItemToInventory(item& Item)
 
         inventory.push_back(std::make_unique<Equippable>(*equippablePtr));
     }
-
-    return "Picked up item: " + this->inventory[this->inventory.size() - 1]->getName() + ".";
 }
 
-std::string Player::removeItemFromInventory(int index)
+void Player::removeItemFromInventory(int index)
 {
-    std::string itemName = inventory[index]->getName();
-
     inventory.erase(inventory.begin() + index);
-
-    return "Dropped item: " + itemName + ".";
 }
 
-std::string Player::equipItem(int index)
+void Player::equipItem(int index)
 {
     item* itemAtIndex = this->getItemAtIndex(index);
     std::string type = itemAtIndex->getType();
@@ -52,11 +43,11 @@ std::string Player::equipItem(int index)
     Equippable* equPtr = static_cast<Equippable*>(this->inventory[index].get());
     if (type == "armor" && this->getEquippedArmorIndex() != -1)
     {
-        return "Please un-equip the armor: " + this->inventory[this->getEquippedArmorIndex()]->getName() + ".";
+        return;
     }
     else if (type == "weapon" && this->getEquippedWeaponIndex() != -1)
     {
-        return "Please un-equip the weapon: " + this->inventory[this->getEquippedWeaponIndex()]->getName() + ".";
+        return;
     }
 
     //then add the stats from the item to the players stats.
@@ -64,12 +55,10 @@ std::string Player::equipItem(int index)
     this->setMaxHealth(this->getMaxHealth() + itemAtIndex->getHpBoost());
     this->wpmBoost += itemAtIndex->getWpmBoost();
     equPtr->setIsEquipped(true);
-
-    return "Equipped " + itemAtIndex->getName() + ".";
 }
 
 
-std::string Player::unequipItem(int index)
+void Player::unequipItem(int index)
 {
     item* itemAtIndex = this->getItemAtIndex(index);
     std::string type = this->inventory[index]->getType();
@@ -84,9 +73,6 @@ std::string Player::unequipItem(int index)
 
     Equippable* equPtr = static_cast<Equippable*>(itemAtIndex);
     equPtr->setIsEquipped(false);
-
-    return "Un-equipped " + itemAtIndex->getName() + ".";
-
 }
 
 void Player::consumePotion(int index)
@@ -116,10 +102,8 @@ void Player::consumePotion(int index)
     this->removeItemFromInventory(index);
 }
 
-std::string Player::potionCheckValidity()
+void Player::potionCheckValidity()
 {
-    std::string potConcatExpired;
-    std::string potConcatValid;
     for (int i = 0; i < consumedPotionsList.size(); i++)
     {
         if (this->consumedPotionsList[i]->getDuration() == 0)
@@ -129,16 +113,11 @@ std::string Player::potionCheckValidity()
             this->accBoost -= this->consumedPotionsList[i]->getAccuracyBoost();
 
             consumedPotionsList.erase(consumedPotionsList.begin() + i);
-
-            potConcatExpired += this->consumedPotionsList[i]->getName();
         } else
         {
             this->consumedPotionsList[i]->roundOver();
-
-            potConcatExpired += this->consumedPotionsList[i]->getName();
         }
     }
-    return "Potions still in effect: " + potConcatValid + "Potions effects cleared: " + potConcatExpired;
 }
 
 void Player::setName(std::string name)

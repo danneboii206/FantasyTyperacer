@@ -13,15 +13,15 @@ Equippable::~Equippable()
 
 void Equippable::getDataFromName(std::string name)
 {
-    std::string dir = "Equippables/";
+    std::string dir = "../items/Equippables/";
     static const std::unordered_map<std::string, std::string> map = {
         {"Divine Sword", "divineSword.txt"},
         {"Dragon Armor", "dragonArmor.txt"},
         {"Dungeon Masters Spear", "dungeonMastersSpear.txt"},
         {"Rasmus' stick", "rasmusStick.txt"}
     };
-    auto it = map.find(name);
-    dir += name;
+    auto it = map.find(name)->second;
+    dir += it;
     std::ifstream file (dir);
     std::string line;
     int linecount = 0;

@@ -12,7 +12,6 @@ class RoomManager
 private:
     menus menu;
     Combat theCombat;
-
 public:
     RoomManager();
     int printMainMenu();

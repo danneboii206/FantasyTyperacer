@@ -11,10 +11,8 @@ add_executable(FantasyTyperacer main.cpp combat.cpp menus.cpp Rooms.cpp
         characterCode/character.cpp
         characterCode/enemy.cpp
         characterCode/Player.cpp
-        characterCode/Player.h
         items/item.cpp
         items/consumable.cpp
         RoomManager.cpp
-        RoomManager.h
         items/Equippable.cpp
 )

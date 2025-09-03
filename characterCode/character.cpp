@@ -17,9 +17,9 @@ void Character::setHealth(const double health)
 {
     this->health = health;
 }
-void Character::setMaxHealth(const double health)
+void Character::setMaxHealth(const double maxHealth)
 {
-    this->maxHealth = health;
+    this->maxHealth = maxHealth;
 }
 double Character::getHealth() const
 {

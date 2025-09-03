@@ -12,7 +12,6 @@ class Combat
 {
 private:
     menus menu;
-
 public:
     Combat();
     int combat(Enemy* enemy, Player& player);

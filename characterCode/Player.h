@@ -21,12 +21,12 @@ private:
 public:
     Player();
     ~Player() override;
-    std::string addItemToInventory(item& Item);
-    std::string removeItemFromInventory(int index);
-    std::string equipItem(int index);
-    std::string unequipItem(int index);
+    void addItemToInventory(item& Item);
+    void removeItemFromInventory(int index);
+    void equipItem(int index);
+    void unequipItem(int index);
     void consumePotion(int index);
-    std::string potionCheckValidity();
+    void potionCheckValidity();
     void setName(std::string name) override;
     std::string getName() const;
     double getAccBoost() const;

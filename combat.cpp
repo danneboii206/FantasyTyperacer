@@ -192,8 +192,7 @@ void Combat::printBattle(Enemy enemy, std::string line, Player& player)
     menu.clearScreen();
     menu.printFile(enemy.getArtPath());
     std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " hp" << std::endl;
-    //printFile(enemy.getDescriptionPath());
-    prt("player hp: " << player.getHealth());
+    std::cout << player.getName() << ": " << player.getHealth() << "/" << player.getMaxHealth() << std::endl;
     prt("type the following line to attack:");
     prt(line);
 }

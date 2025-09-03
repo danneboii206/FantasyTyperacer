@@ -21,7 +21,7 @@ void menus::clearScreen()
 
 void menus::printFile(std::string filePath)
 {
-    std::ifstream file(filePath); // Changed to ifstream for reading
+    std::ifstream file(filePath);
     if (file.is_open()) {
         // Print the contents of the file
         std::cout << file.rdbuf();
@@ -29,7 +29,6 @@ void menus::printFile(std::string filePath)
         file.close();
     } else {
         std::cerr << "Error: Unable to open" << filePath << std::endl;
-        //prt(std::filesystem::current_path());
     }
 }
 
@@ -89,12 +88,10 @@ void menus::openInventory(Player& player)
 
     while (true)
     {
-        item* itemTest = player.getItemAtIndex(1);
         clearScreen();
 
         std::cout << "\n";
         std::cout << "type the corresponding number to interact with the item" << "\n";
-        //give loot
         int menuChoices = 0;
 
 

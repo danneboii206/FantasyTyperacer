@@ -14,7 +14,7 @@ public:
     virtual ~Character();
     void takeDamage(double damage);
     void setHealth(double health);
-    void setMaxHealth(double health);
+    void setMaxHealth(double maxHealth);
     double getHealth() const;
     double getMaxHealth() const;
     virtual void setName(std::string name) = 0;
