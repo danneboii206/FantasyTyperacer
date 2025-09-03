@@ -21,7 +21,7 @@ public:
   bool getHasEnemy() const;
   std::string getDescription() const;
   int getItemCount() const;
-  std::shared_ptr<item> getItemAtIndex(int index) const;
+  item* getItemAtIndex(int index) const;
 };
 
 

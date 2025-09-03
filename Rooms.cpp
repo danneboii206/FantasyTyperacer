@@ -108,11 +108,10 @@ int Rooms::getItemCount() const
     return itemCount;
 }
 
-std::shared_ptr<item> Rooms::getItemAtIndex(int index) const
+item* Rooms::getItemAtIndex(int index) const
 {
     if (index >= itemCount)
         return nullptr;
 
-    return roomItems[index];
-
+    return roomItems[index].get();
 }
