@@ -31,12 +31,7 @@ Rooms::~Rooms()
 {
 }
 
-/*
-item** Rooms::getItems()
-{
-    return roomItems;
-}
-*/
+
 
 bool Rooms::getHasEnemy() const
 {
@@ -51,10 +46,6 @@ std::string Rooms::getDescription() const
 void Rooms::generateRoom()
 
 {
-    //srand(time(nullptr));
-    //std::random_device rd;
-    //std::mt19937 gen(rd());
-    //std::uniform_int_distribution<int> distr1(0, 1);
 
     srand(time(nullptr));
 
