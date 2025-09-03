@@ -20,7 +20,7 @@ private:
     std::vector<std::unique_ptr<consumable>> consumedPotionsList;
 public:
     Player();
-    ~Player() override;
+    ~Player();
     void addItemToInventory(item& Item);
     void removeItemFromInventory(int index);
     void equipItem(int index);
@@ -35,7 +35,5 @@ public:
     int getEquippedWeaponIndex() const;
     item* getItemAtIndex(int index) const;
     int getMAX_INVENTORY_SIZE() const;
-    void printItems() const;
-    void printStats() const;
 };
 #endif //PLAYER_H

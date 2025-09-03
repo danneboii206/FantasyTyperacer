@@ -180,20 +180,6 @@ int Player::getEquippedWeaponIndex() const
     return -1;
 }
 
-void Player::printItems() const
-{
-    for (int i = 0; i < this->inventory.size(); i++)
-    {
-        std::cout << "index: [" << i << "], " <<"name: " + this->inventory[i]->getName() +
-            ", type: " + this->inventory[i]->getType() << std::endl;
-    }
-}
-
-void Player::printStats() const
-{
-    std::cout << "wpm boost: +" << this->wpmBoost << "wpm, accuracy boost: +"
-              << this->accBoost << "%, maxHP: " << std::to_string(this->getMaxHealth()) << std::endl;
-}
 
 item* Player::getItemAtIndex(int index) const
 {

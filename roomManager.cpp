@@ -191,8 +191,6 @@ int RoomManager::finishRoom(Rooms room, Player& player)
         player.addItemToInventory(*roomItems[input-1]);
         roomItems.erase(roomItems.begin() + input-1);
         itemCount--;
-
-        player.printItems();
     }
     return 1;
 }

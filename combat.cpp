@@ -184,7 +184,6 @@ void Combat::printOptions(Player & player)
 {
     menu.clearScreen();
     prt("would you like to use an item)");
-    player.printItems();
 }
 
 void Combat::printBattle(Enemy enemy, std::string line, Player& player)

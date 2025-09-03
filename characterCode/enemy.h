@@ -15,7 +15,7 @@ private:
 public:
     Enemy(double damage, double maxHealth, std::string name);
     Enemy() = delete;
-    virtual ~Enemy();
+    ~Enemy();
     void setName(std::string name) override;
     void setDescriptionPath(std::string descriptionPath);
     void setArtPath(std::string artPath);
